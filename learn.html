@@ -1,0 +1,1075 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GirlCode Future | Your Future Starts Here</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <div id="header-placeholder"></div>
+
+
+    <!-- ==========================================
+         DISCOVER YOURSELF QUIZ
+    =========================================== -->
+
+    <section id="discover-yourself" class="discover-section">
+
+        <div class="discover-heading">
+            <span class="discover-label">YOUR FUTURE, YOUR WAY</span>
+            <h2>✨ Discover Yourself</h2>
+            <p>
+                Answer 15 questions about your interests, strengths and ambitions
+                to discover careers that could suit you.
+            </p>
+        </div>
+
+        <div class="quiz-container" id="careerQuiz">
+
+            <!-- WELCOME SCREEN -->
+            <div id="quizWelcome" class="quiz-welcome">
+
+                <div class="quiz-welcome-icon">✨</div>
+
+                <h3>Ready to discover your future?</h3>
+
+                <p>
+                    Answer 15 questions about your interests, strengths and ambitions.
+                    We'll suggest five careers you might love.
+                </p>
+
+                <button type="button" id="startQuiz">
+                    Take Quiz →
+                </button>
+
+                <p class="quiz-time">
+                    15 questions · 5 career matches
+                </p>
+
+            </div>
+
+
+            <!-- QUIZ PROGRESS -->
+            <div class="quiz-top" id="quizTop" hidden>
+                <span id="quizQuestionNumber">Question 1 of 15</span>
+                <span id="quizProgressText">7% completed</span>
+            </div>
+
+            <div class="quiz-progress" id="quizProgress" hidden>
+                <div id="quizProgressBar"></div>
+            </div>
+
+
+            <!-- QUESTIONS -->
+            <div id="quizQuestionArea" hidden>
+
+                <h3 id="quizQuestion"></h3>
+
+                <p id="quizInstruction">
+                    Choose the answer that feels most like you.
+                </p>
+
+                <div id="quizOptions" class="quiz-options"></div>
+
+            </div>
+
+
+            <!-- QUIZ NAVIGATION -->
+            <div class="quiz-navigation" id="quizNavigation" hidden>
+
+                <button type="button" id="quizBack" disabled>
+                    ← Back
+                </button>
+
+                <button type="button" id="quizNext" disabled>
+                    Next →
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- QUIZ RESULTS -->
+        <div id="careerQuizResults" class="quiz-results" hidden>
+
+            <div class="results-heading">
+
+                <span>YOUR DISCOVERY RESULTS</span>
+
+                <h2>Look what you could become! ✨</h2>
+
+                <p>
+                    Based on your answers, here are five careers worth exploring.
+                </p>
+
+            </div>
+
+            <div id="careerMatches" class="career-matches"></div>
+
+            <div class="results-actions">
+
+                <button type="button" id="quizRestart">
+                    ↻ Retake the quiz
+                </button>
+
+                <button type="button" id="exploreAllCareers">
+                    Explore all careers
+                </button>
+
+            </div>
+
+            <p class="quiz-disclaimer">
+                These recommendations are suggestions based on your answers,
+                not a formal assessment. Your interests can change, and you may
+                enjoy careers beyond these results.
+            </p>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==========================================
+         EXPLORE CAREERS
+    =========================================== -->
+
+    <section id="careers">
+
+        <h2 class="section-title">
+            🔮 What could your future look like?
+        </h2>
+
+        <p class="section-intro">
+            There are thousands of career paths to explore. You can combine
+            creativity, science, technology, design, problem-solving and helping people.
+        </p>
+
+
+        <!-- SEARCH BAR AND FILTERS -->
+        <div class="career-controls">
+
+            <input
+                type="text"
+                id="careerSearch"
+                placeholder="🔍 Search careers..."
+                oninput="filterCareers()"
+            >
+
+            <div class="career-filters">
+
+                <button class="filter-btn active" onclick="setCareerFilter('all', this)">All Careers</button>
+                <button class="filter-btn" onclick="setCareerFilter('technology', this)">💻 Technology</button>
+                <button class="filter-btn" onclick="setCareerFilter('engineering', this)">⚙️ Engineering</button>
+                <button class="filter-btn" onclick="setCareerFilter('science', this)">🔬 Science</button>
+                <button class="filter-btn" onclick="setCareerFilter('healthcare', this)">🏥 Healthcare</button>
+                <button class="filter-btn" onclick="setCareerFilter('business', this)">💼 Business</button>
+                <button class="filter-btn" onclick="setCareerFilter('law', this)">⚖️ Law</button>
+                <button class="filter-btn" onclick="setCareerFilter('arts', this)">🎨 Arts & Media</button>
+                <button class="filter-btn" onclick="setCareerFilter('education', this)">📚 Education</button>
+                <button class="filter-btn" onclick="setCareerFilter('environment', this)">🌱 Environment</button>
+                <button class="filter-btn" onclick="setCareerFilter('architecture', this)">🏗️ Architecture</button>
+                <button class="filter-btn" onclick="setCareerFilter('aviation', this)">✈️ Aviation & Defence</button>
+                <button class="filter-btn" onclick="setCareerFilter('sports', this)">🏆 Sports</button>
+                <button class="filter-btn" onclick="setCareerFilter('hospitality', this)">🏨 Hospitality</button>
+                <button class="filter-btn" onclick="setCareerFilter('social', this)">🌍 Social Sciences</button>
+
+            </div>
+
+            <p id="careerCount" aria-live="polite"></p>
+
+        </div>
+
+
+
+        <!-- ==========================================
+             CAREER CARDS
+        =========================================== -->
+
+        <div class="cards">
+
+
+            <!-- TECHNOLOGY AND COMPUTING -->
+
+            <article class="card" data-category="technology">
+                <div class="emoji">👩‍💻</div>
+                <h3>Software Developer</h3>
+                <p>Build apps, websites and digital tools.</p>
+            </article>
+
+            <article class="card" data-category="technology">
+                <div class="emoji">🔐</div>
+                <h3>Cybersecurity Expert</h3>
+                <p>Protect people, information and computer systems from cyber threats.</p>
+            </article>
+
+            <article class="card" data-category="technology">
+                <div class="emoji">🎨</div>
+                <h3>UX Designer</h3>
+                <p>Make websites and apps easier and more enjoyable to use.</p>
+            </article>
+
+            <article class="card" data-category="technology">
+                <div class="emoji">🧠</div>
+                <h3>AI Researcher</h3>
+                <p>Explore how artificial intelligence can solve complex problems.</p>
+            </article>
+
+            <article class="card" data-category="technology">
+                <div class="emoji">📊</div>
+                <h3>Data Scientist</h3>
+                <p>Analyse information to discover patterns and make better decisions.</p>
+            </article>
+
+            <article class="card" data-category="technology">
+                <div class="emoji">🤖</div>
+                <h3>Robotics Engineer</h3>
+                <p>Design and develop intelligent robots and automated machines.</p>
+            </article>
+
+            <article class="card" data-category="technology">
+                <div class="emoji">☁️</div>
+                <h3>Cloud Engineer</h3>
+                <p>Build and manage online computing infrastructure and services.</p>
+            </article>
+
+            <article class="card" data-category="technology">
+                <div class="emoji">🎮</div>
+                <h3>Game Developer</h3>
+                <p>Create interactive video games and virtual experiences.</p>
+            </article>
+
+            <article class="card" data-category="technology">
+                <div class="emoji">🌐</div>
+                <h3>Web Developer</h3>
+                <p>Design and develop websites and online platforms.</p>
+            </article>
+
+            <article class="card" data-category="technology">
+                <div class="emoji">📱</div>
+                <h3>Mobile App Developer</h3>
+                <p>Create applications for smartphones and tablets.</p>
+            </article>
+
+            <article class="card" data-category="technology">
+                <div class="emoji">🗄️</div>
+                <h3>Database Administrator</h3>
+                <p>Organise, manage and protect important digital information.</p>
+            </article>
+
+            <article class="card" data-category="technology">
+                <div class="emoji">🧑‍💻</div>
+                <h3>Systems Analyst</h3>
+                <p>Improve computer systems and solve technology-related business problems.</p>
+            </article>
+
+            <article class="card" data-category="technology">
+                <div class="emoji">🕵️</div>
+                <h3>Digital Forensics Investigator</h3>
+                <p>Investigate cybercrime by examining digital devices and evidence.</p>
+            </article>
+
+            <article class="card" data-category="technology">
+                <div class="emoji">📡</div>
+                <h3>Network Engineer</h3>
+                <p>Build and maintain the networks that connect computers and devices.</p>
+            </article>
+
+            <article class="card" data-category="technology">
+                <div class="emoji">⚙️</div>
+                <h3>DevOps Engineer</h3>
+                <p>Help software teams build, test and release applications efficiently.</p>
+            </article>
+
+            <article class="card" data-category="technology">
+                <div class="emoji">🧬</div>
+                <h3>Bioinformatics Scientist</h3>
+                <p>Combine biology and computing to study genetic and biological data.</p>
+            </article>
+
+            <article class="card" data-category="technology">
+                <div class="emoji">🧩</div>
+                <h3>Computer Systems Architect</h3>
+                <p>Plan and design the structure of complex computer systems.</p>
+            </article>
+
+            <article class="card" data-category="technology">
+                <div class="emoji">🔬</div>
+                <h3>Quantum Computing Researcher</h3>
+                <p>Explore new computing technologies based on quantum physics.</p>
+            </article>
+
+
+            <!-- ENGINEERING -->
+
+            <article class="card" data-category="engineering">
+                <div class="emoji">⚙️</div>
+                <h3>Mechanical Engineer</h3>
+                <p>Design and develop machines, engines and mechanical systems.</p>
+            </article>
+
+            <article class="card" data-category="engineering">
+                <div class="emoji">✈️</div>
+                <h3>Aerospace Engineer</h3>
+                <p>Design aircraft, spacecraft and advanced flight technologies.</p>
+            </article>
+
+            <article class="card" data-category="engineering">
+                <div class="emoji">🏎️</div>
+                <h3>Motorsport Engineer</h3>
+                <p>Improve racing car performance through engineering and technology.</p>
+            </article>
+
+            <article class="card" data-category="engineering">
+                <div class="emoji">🏗️</div>
+                <h3>Civil Engineer</h3>
+                <p>Design and build bridges, roads, buildings and infrastructure.</p>
+            </article>
+
+            <article class="card" data-category="engineering">
+                <div class="emoji">⚡</div>
+                <h3>Electrical Engineer</h3>
+                <p>Develop electrical systems, circuits and power technologies.</p>
+            </article>
+
+            <article class="card" data-category="engineering">
+                <div class="emoji">🔌</div>
+                <h3>Electronics Engineer</h3>
+                <p>Design electronic devices, components and control systems.</p>
+            </article>
+
+            <article class="card" data-category="engineering">
+                <div class="emoji">🧪</div>
+                <h3>Chemical Engineer</h3>
+                <p>Develop processes for producing medicines, materials and chemicals.</p>
+            </article>
+
+            <article class="card" data-category="engineering">
+                <div class="emoji">🚗</div>
+                <h3>Automotive Engineer</h3>
+                <p>Design and improve cars, engines and vehicle technologies.</p>
+            </article>
+
+            <article class="card" data-category="engineering">
+                <div class="emoji">🦾</div>
+                <h3>Mechatronics Engineer</h3>
+                <p>Combine mechanics, electronics and computing to build smart machines.</p>
+            </article>
+
+            <article class="card" data-category="engineering">
+                <div class="emoji">🌱</div>
+                <h3>Renewable Energy Engineer</h3>
+                <p>Develop cleaner energy solutions such as wind and solar power.</p>
+            </article>
+
+            <article class="card" data-category="engineering">
+                <div class="emoji">🧱</div>
+                <h3>Structural Engineer</h3>
+                <p>Make sure buildings and structures are safe, strong and stable.</p>
+            </article>
+
+            <article class="card" data-category="engineering">
+                <div class="emoji">🚢</div>
+                <h3>Marine Engineer</h3>
+                <p>Design and maintain ships, submarines and marine equipment.</p>
+            </article>
+
+            <article class="card" data-category="engineering">
+                <div class="emoji">☢️</div>
+                <h3>Nuclear Engineer</h3>
+                <p>Work with nuclear energy, radiation systems and reactor technology.</p>
+            </article>
+
+
+            <!-- SCIENCE AND RESEARCH -->
+
+            <article class="card" data-category="science">
+                <div class="emoji">🔭</div>
+                <h3>Astronomer</h3>
+                <p>Study stars, planets, galaxies and the universe.</p>
+            </article>
+
+            <article class="card" data-category="science">
+                <div class="emoji">⚛️</div>
+                <h3>Physicist</h3>
+                <p>Investigate matter, energy and the fundamental laws of nature.</p>
+            </article>
+
+            <article class="card" data-category="science">
+                <div class="emoji">🧫</div>
+                <h3>Microbiologist</h3>
+                <p>Study microorganisms such as bacteria, viruses and fungi.</p>
+            </article>
+
+            <article class="card" data-category="science">
+                <div class="emoji">🧬</div>
+                <h3>Geneticist</h3>
+                <p>Study genes, DNA and how characteristics are inherited.</p>
+            </article>
+
+            <article class="card" data-category="science">
+                <div class="emoji">🧪</div>
+                <h3>Chemist</h3>
+                <p>Study substances and develop new materials and chemical products.</p>
+            </article>
+
+            <article class="card" data-category="science">
+                <div class="emoji">🦕</div>
+                <h3>Palaeontologist</h3>
+                <p>Study fossils to understand ancient life and Earth's history.</p>
+            </article>
+
+            <article class="card" data-category="science">
+                <div class="emoji">🌊</div>
+                <h3>Marine Biologist</h3>
+                <p>Study ocean life and help protect marine ecosystems.</p>
+            </article>
+
+            <article class="card" data-category="science">
+                <div class="emoji">🌋</div>
+                <h3>Geologist</h3>
+                <p>Explore rocks, minerals and the physical history of Earth.</p>
+            </article>
+
+            <article class="card" data-category="science">
+                <div class="emoji">🌦️</div>
+                <h3>Meteorologist</h3>
+                <p>Study weather patterns and help predict atmospheric conditions.</p>
+            </article>
+
+            <article class="card" data-category="science">
+                <div class="emoji">🧠</div>
+                <h3>Neuroscientist</h3>
+                <p>Research the brain, nervous system and human behaviour.</p>
+            </article>
+
+            <article class="card" data-category="science">
+                <div class="emoji">🌿</div>
+                <h3>Ecologist</h3>
+                <p>Study relationships between living organisms and their environment.</p>
+            </article>
+
+            <article class="card" data-category="science">
+                <div class="emoji">🧮</div>
+                <h3>Mathematician</h3>
+                <p>Explore mathematical theories and solve complex numerical problems.</p>
+            </article>
+
+            <article class="card" data-category="science">
+                <div class="emoji">📈</div>
+                <h3>Statistician</h3>
+                <p>Use mathematical methods to analyse data and identify trends.</p>
+            </article>
+
+            <article class="card" data-category="science">
+                <div class="emoji">🔍</div>
+                <h3>Forensic Scientist</h3>
+                <p>Examine scientific evidence to help investigate crimes.</p>
+            </article>
+
+
+            <!-- MEDICINE AND HEALTHCARE -->
+
+            <article class="card" data-category="healthcare">
+                <div class="emoji">🩺</div>
+                <h3>Doctor</h3>
+                <p>Diagnose illnesses, treat patients and improve people's health.</p>
+            </article>
+
+            <article class="card" data-category="healthcare">
+                <div class="emoji">🏥</div>
+                <h3>Surgeon</h3>
+                <p>Perform operations to treat injuries, diseases and medical conditions.</p>
+            </article>
+
+            <article class="card" data-category="healthcare">
+                <div class="emoji">🦷</div>
+                <h3>Dentist</h3>
+                <p>Look after people's teeth, gums and overall oral health.</p>
+            </article>
+
+            <article class="card" data-category="healthcare">
+                <div class="emoji">💊</div>
+                <h3>Pharmacist</h3>
+                <p>Prepare and provide medicines and advise patients about treatments.</p>
+            </article>
+
+            <article class="card" data-category="healthcare">
+                <div class="emoji">🩹</div>
+                <h3>Nurse</h3>
+                <p>Care for patients and support their recovery and wellbeing.</p>
+            </article>
+
+            <article class="card" data-category="healthcare">
+                <div class="emoji">🧠</div>
+                <h3>Psychologist</h3>
+                <p>Study human behaviour, emotions and mental processes.</p>
+            </article>
+
+            <article class="card" data-category="healthcare">
+                <div class="emoji">🧑‍⚕️</div>
+                <h3>Psychiatrist</h3>
+                <p>Diagnose and treat mental health conditions as a medical doctor.</p>
+            </article>
+
+            <article class="card" data-category="healthcare">
+                <div class="emoji">🏃</div>
+                <h3>Physiotherapist</h3>
+                <p>Help people recover movement and physical strength after injuries.</p>
+            </article>
+
+            <article class="card" data-category="healthcare">
+                <div class="emoji">👁️</div>
+                <h3>Optometrist</h3>
+                <p>Examine people's eyes and identify vision problems.</p>
+            </article>
+
+            <article class="card" data-category="healthcare">
+                <div class="emoji">🦴</div>
+                <h3>Orthopaedic Specialist</h3>
+                <p>Treat problems affecting bones, joints, muscles and movement.</p>
+            </article>
+
+            <article class="card" data-category="healthcare">
+                <div class="emoji">🧬</div>
+                <h3>Biomedical Scientist</h3>
+                <p>Analyse biological samples to help diagnose and investigate diseases.</p>
+            </article>
+
+            <article class="card" data-category="healthcare">
+                <div class="emoji">🥗</div>
+                <h3>Dietitian</h3>
+                <p>Help people manage their health through food and nutrition.</p>
+            </article>
+
+            <article class="card" data-category="healthcare">
+                <div class="emoji">🚑</div>
+                <h3>Paramedic</h3>
+                <p>Provide emergency medical care to people in critical situations.</p>
+            </article>
+
+            <article class="card" data-category="healthcare">
+                <div class="emoji">🧒</div>
+                <h3>Paediatrician</h3>
+                <p>Provide medical care for babies, children and young people.</p>
+            </article>
+
+            <article class="card" data-category="healthcare">
+                <div class="emoji">🦻</div>
+                <h3>Audiologist</h3>
+                <p>Assess hearing problems and help people manage hearing loss.</p>
+            </article>
+
+            <article class="card" data-category="healthcare">
+                <div class="emoji">🗣️</div>
+                <h3>Speech Therapist</h3>
+                <p>Help people improve communication, speech and swallowing abilities.</p>
+            </article>
+
+            <article class="card" data-category="healthcare">
+                <div class="emoji">🐾</div>
+                <h3>Veterinarian</h3>
+                <p>Diagnose and treat illnesses and injuries in animals.</p>
+            </article>
+
+
+            <!-- BUSINESS AND FINANCE -->
+
+            <article class="card" data-category="business">
+                <div class="emoji">💼</div>
+                <h3>Business Manager</h3>
+                <p>Lead teams and manage business operations and strategies.</p>
+            </article>
+
+            <article class="card" data-category="business">
+                <div class="emoji">💰</div>
+                <h3>Investment Banker</h3>
+                <p>Help companies raise money and manage major financial transactions.</p>
+            </article>
+
+            <article class="card" data-category="business">
+                <div class="emoji">📊</div>
+                <h3>Financial Analyst</h3>
+                <p>Evaluate financial information to support investment decisions.</p>
+            </article>
+
+            <article class="card" data-category="business">
+                <div class="emoji">🧾</div>
+                <h3>Accountant</h3>
+                <p>Manage financial records, budgets, taxes and business accounts.</p>
+            </article>
+
+            <article class="card" data-category="business">
+                <div class="emoji">📉</div>
+                <h3>Economist</h3>
+                <p>Study how money, markets and economies work.</p>
+            </article>
+
+            <article class="card" data-category="business">
+                <div class="emoji">📣</div>
+                <h3>Marketing Manager</h3>
+                <p>Develop strategies to promote products, services and brands.</p>
+            </article>
+
+            <article class="card" data-category="business">
+                <div class="emoji">🚀</div>
+                <h3>Entrepreneur</h3>
+                <p>Start and grow businesses by turning ideas into opportunities.</p>
+            </article>
+
+            <article class="card" data-category="business">
+                <div class="emoji">📦</div>
+                <h3>Supply Chain Manager</h3>
+                <p>Manage how products are sourced, transported and delivered.</p>
+            </article>
+
+            <article class="card" data-category="business">
+                <div class="emoji">📈</div>
+                <h3>Actuary</h3>
+                <p>Use mathematics and statistics to assess financial risks.</p>
+            </article>
+
+            <article class="card" data-category="business">
+                <div class="emoji">🏦</div>
+                <h3>Financial Adviser</h3>
+                <p>Help people plan their savings, investments and financial futures.</p>
+            </article>
+
+            <article class="card" data-category="business">
+                <div class="emoji">👥</div>
+                <h3>Human Resources Manager</h3>
+                <p>Manage recruitment, employee development and workplace relationships.</p>
+            </article>
+
+            <article class="card" data-category="business">
+                <div class="emoji">📋</div>
+                <h3>Project Manager</h3>
+                <p>Plan and coordinate projects to achieve specific goals.</p>
+            </article>
+
+            <article class="card" data-category="business">
+                <div class="emoji">🏢</div>
+                <h3>Management Consultant</h3>
+                <p>Help organisations improve performance and solve business challenges.</p>
+            </article>
+
+            <article class="card" data-category="business">
+                <div class="emoji">🛒</div>
+                <h3>E-commerce Manager</h3>
+                <p>Manage online stores, digital sales and shopping experiences.</p>
+            </article>
+
+
+            <!-- LAW AND GOVERNMENT -->
+
+            <article class="card" data-category="law">
+                <div class="emoji">⚖️</div>
+                <h3>Lawyer</h3>
+                <p>Advise clients and represent them in legal matters.</p>
+            </article>
+
+            <article class="card" data-category="law">
+                <div class="emoji">👨‍⚖️</div>
+                <h3>Judge</h3>
+                <p>Make legal decisions and ensure justice is applied fairly.</p>
+            </article>
+
+            <article class="card" data-category="law">
+                <div class="emoji">🏛️</div>
+                <h3>Politician</h3>
+                <p>Represent communities and help shape government policies.</p>
+            </article>
+
+            <article class="card" data-category="law">
+                <div class="emoji">🌍</div>
+                <h3>Diplomat</h3>
+                <p>Represent a country and build relationships with other nations.</p>
+            </article>
+
+            <article class="card" data-category="law">
+                <div class="emoji">🔎</div>
+                <h3>Criminologist</h3>
+                <p>Study crime, criminal behaviour and ways to improve public safety.</p>
+            </article>
+
+            <article class="card" data-category="law">
+                <div class="emoji">🚔</div>
+                <h3>Police Officer</h3>
+                <p>Protect communities, investigate crimes and maintain public order.</p>
+            </article>
+
+            <article class="card" data-category="law">
+                <div class="emoji">🕵️</div>
+                <h3>Intelligence Analyst</h3>
+                <p>Analyse information to help organisations identify security threats.</p>
+            </article>
+
+            <article class="card" data-category="law">
+                <div class="emoji">📜</div>
+                <h3>Legal Researcher</h3>
+                <p>Research laws, legal cases and developments in the justice system.</p>
+            </article>
+
+
+            <!-- ARTS AND MEDIA -->
+
+            <article class="card" data-category="arts">
+                <div class="emoji">🖌️</div>
+                <h3>Graphic Designer</h3>
+                <p>Create visual designs for brands, advertisements and publications.</p>
+            </article>
+
+            <article class="card" data-category="arts">
+                <div class="emoji">📸</div>
+                <h3>Photographer</h3>
+                <p>Capture images for journalism, events, advertising and art.</p>
+            </article>
+
+            <article class="card" data-category="arts">
+                <div class="emoji">🎬</div>
+                <h3>Film Director</h3>
+                <p>Lead the creative process of producing films and visual stories.</p>
+            </article>
+
+            <article class="card" data-category="arts">
+                <div class="emoji">🎭</div>
+                <h3>Actor</h3>
+                <p>Bring characters and stories to life through performance.</p>
+            </article>
+
+            <article class="card" data-category="arts">
+                <div class="emoji">👗</div>
+                <h3>Fashion Designer</h3>
+                <p>Create clothing, accessories and new fashion collections.</p>
+            </article>
+
+            <article class="card" data-category="arts">
+                <div class="emoji">🏠</div>
+                <h3>Interior Designer</h3>
+                <p>Design attractive, practical and comfortable indoor spaces.</p>
+            </article>
+
+            <article class="card" data-category="arts">
+                <div class="emoji">✍️</div>
+                <h3>Writer / Author</h3>
+                <p>Create books, stories, articles and other written content.</p>
+            </article>
+
+            <article class="card" data-category="arts">
+                <div class="emoji">📰</div>
+                <h3>Journalist</h3>
+                <p>Research and report news and important events.</p>
+            </article>
+
+            <article class="card" data-category="arts">
+                <div class="emoji">🎧</div>
+                <h3>Music Producer</h3>
+                <p>Create, record and develop music and audio productions.</p>
+            </article>
+
+            <article class="card" data-category="arts">
+                <div class="emoji">🎞️</div>
+                <h3>Animator</h3>
+                <p>Create moving images for films, games and digital media.</p>
+            </article>
+
+            <article class="card" data-category="arts">
+                <div class="emoji">🕹️</div>
+                <h3>3D Artist</h3>
+                <p>Build realistic digital models, characters and environments.</p>
+            </article>
+
+            <article class="card" data-category="arts">
+                <div class="emoji">📺</div>
+                <h3>Content Creator</h3>
+                <p>Produce videos, posts and digital content for online audiences.</p>
+            </article>
+
+            <article class="card" data-category="arts">
+                <div class="emoji">🎤</div>
+                <h3>Broadcaster</h3>
+                <p>Present programmes, interviews and news across media platforms.</p>
+            </article>
+
+
+            <!-- EDUCATION -->
+
+            <article class="card" data-category="education">
+                <div class="emoji">📚</div>
+                <h3>Teacher</h3>
+                <p>Educate students and help them develop knowledge and skills.</p>
+            </article>
+
+            <article class="card" data-category="education">
+                <div class="emoji">🎓</div>
+                <h3>University Lecturer</h3>
+                <p>Teach university students and contribute to academic research.</p>
+            </article>
+
+            <article class="card" data-category="education">
+                <div class="emoji">🧑‍🏫</div>
+                <h3>Education Consultant</h3>
+                <p>Help schools and organisations improve teaching and learning.</p>
+            </article>
+
+
+            <!-- SOCIAL SCIENCES -->
+
+            <article class="card" data-category="social">
+                <div class="emoji">🧠</div>
+                <h3>Sociologist</h3>
+                <p>Study society, communities and human relationships.</p>
+            </article>
+
+            <article class="card" data-category="social">
+                <div class="emoji">🏺</div>
+                <h3>Archaeologist</h3>
+                <p>Discover and study evidence of past human civilisations.</p>
+            </article>
+
+            <article class="card" data-category="social">
+                <div class="emoji">🌏</div>
+                <h3>Geographer</h3>
+                <p>Study Earth's landscapes, populations and human environments.</p>
+            </article>
+
+            <article class="card" data-category="social">
+                <div class="emoji">🤝</div>
+                <h3>Social Worker</h3>
+                <p>Support individuals and families facing difficult life situations.</p>
+            </article>
+
+            <article class="card" data-category="social">
+                <div class="emoji">🗣️</div>
+                <h3>Translator</h3>
+                <p>Convert written or spoken information between different languages.</p>
+            </article>
+
+            <article class="card" data-category="social">
+                <div class="emoji">🧭</div>
+                <h3>International Relations Specialist</h3>
+                <p>Study global politics, diplomacy and relationships between countries.</p>
+            </article>
+
+            <article class="card" data-category="social">
+                <div class="emoji">📖</div>
+                <h3>Historian</h3>
+                <p>Research and interpret events, people and societies from the past.</p>
+            </article>
+
+
+            <!-- ENVIRONMENT AND AGRICULTURE -->
+
+            <article class="card" data-category="environment">
+                <div class="emoji">🌳</div>
+                <h3>Environmental Scientist</h3>
+                <p>Study environmental challenges and develop solutions to protect nature.</p>
+            </article>
+
+            <article class="card" data-category="environment">
+                <div class="emoji">🌾</div>
+                <h3>Agricultural Scientist</h3>
+                <p>Improve farming methods, crop production and food quality.</p>
+            </article>
+
+            <article class="card" data-category="environment">
+                <div class="emoji">🐘</div>
+                <h3>Wildlife Conservationist</h3>
+                <p>Protect endangered animals and preserve natural habitats.</p>
+            </article>
+
+            <article class="card" data-category="environment">
+                <div class="emoji">🌍</div>
+                <h3>Climate Scientist</h3>
+                <p>Research climate change and understand long-term weather patterns.</p>
+            </article>
+
+            <article class="card" data-category="environment">
+                <div class="emoji">🌲</div>
+                <h3>Forester</h3>
+                <p>Manage forests and protect woodland ecosystems.</p>
+            </article>
+
+            <article class="card" data-category="environment">
+                <div class="emoji">🐟</div>
+                <h3>Fisheries Scientist</h3>
+                <p>Study fish populations and support sustainable fishing practices.</p>
+            </article>
+
+            <article class="card" data-category="environment">
+                <div class="emoji">♻️</div>
+                <h3>Sustainability Consultant</h3>
+                <p>Help businesses reduce waste and operate more sustainably.</p>
+            </article>
+
+
+            <!-- ARCHITECTURE AND CONSTRUCTION -->
+
+            <article class="card" data-category="architecture">
+                <div class="emoji">🏛️</div>
+                <h3>Architect</h3>
+                <p>Design buildings and spaces that are functional and inspiring.</p>
+            </article>
+
+            <article class="card" data-category="architecture">
+                <div class="emoji">🏙️</div>
+                <h3>Urban Planner</h3>
+                <p>Plan towns and cities to create better places to live.</p>
+            </article>
+
+            <article class="card" data-category="architecture">
+                <div class="emoji">📐</div>
+                <h3>Quantity Surveyor</h3>
+                <p>Manage construction costs, budgets and contracts.</p>
+            </article>
+
+            <article class="card" data-category="architecture">
+                <div class="emoji">🏢</div>
+                <h3>Property Developer</h3>
+                <p>Invest in and transform land and buildings into new developments.</p>
+            </article>
+
+            <article class="card" data-category="architecture">
+                <div class="emoji">🏗️</div>
+                <h3>Construction Manager</h3>
+                <p>Coordinate construction projects, workers and building schedules.</p>
+            </article>
+
+
+            <!-- AVIATION, DEFENCE AND TRANSPORT -->
+
+            <article class="card" data-category="aviation">
+                <div class="emoji">✈️</div>
+                <h3>Commercial Pilot</h3>
+                <p>Fly aircraft and transport passengers or cargo around the world.</p>
+            </article>
+
+            <article class="card" data-category="aviation">
+                <div class="emoji">🛫</div>
+                <h3>Air Traffic Controller</h3>
+                <p>Coordinate aircraft movements to maintain safe air travel.</p>
+            </article>
+
+            <article class="card" data-category="aviation">
+                <div class="emoji">🪖</div>
+                <h3>Military Officer</h3>
+                <p>Lead personnel and support national defence operations.</p>
+            </article>
+
+            <article class="card" data-category="aviation">
+                <div class="emoji">🚀</div>
+                <h3>Astronaut</h3>
+                <p>Train for and participate in human space exploration missions.</p>
+            </article>
+
+            <article class="card" data-category="aviation">
+                <div class="emoji">🛳️</div>
+                <h3>Ship Captain</h3>
+                <p>Navigate and command ships and maritime operations.</p>
+            </article>
+
+            <article class="card" data-category="aviation">
+                <div class="emoji">🛰️</div>
+                <h3>Satellite Engineer</h3>
+                <p>Design and develop satellites and space communication systems.</p>
+            </article>
+
+
+            <!-- SPORTS AND FITNESS -->
+
+            <article class="card" data-category="sports">
+                <div class="emoji">⚽</div>
+                <h3>Professional Athlete</h3>
+                <p>Compete in sports at professional and international levels.</p>
+            </article>
+
+            <article class="card" data-category="sports">
+                <div class="emoji">🏋️</div>
+                <h3>Personal Trainer</h3>
+                <p>Help people improve their fitness, strength and physical health.</p>
+            </article>
+
+            <article class="card" data-category="sports">
+                <div class="emoji">🏆</div>
+                <h3>Sports Coach</h3>
+                <p>Train athletes and help teams improve their performance.</p>
+            </article>
+
+            <article class="card" data-category="sports">
+                <div class="emoji">📊</div>
+                <h3>Sports Analyst</h3>
+                <p>Use statistics and performance data to improve sporting results.</p>
+            </article>
+
+            <article class="card" data-category="sports">
+                <div class="emoji">🧘</div>
+                <h3>Exercise Physiologist</h3>
+                <p>Study how physical activity affects the human body.</p>
+            </article>
+
+            <article class="card" data-category="sports">
+                <div class="emoji">🥇</div>
+                <h3>Sports Manager</h3>
+                <p>Manage sporting organisations, athletes and sporting events.</p>
+            </article>
+
+
+            <!-- HOSPITALITY AND TOURISM -->
+
+            <article class="card" data-category="hospitality">
+                <div class="emoji">🏨</div>
+                <h3>Hotel Manager</h3>
+                <p>Manage hotel operations and deliver excellent guest experiences.</p>
+            </article>
+
+            <article class="card" data-category="hospitality">
+                <div class="emoji">🌴</div>
+                <h3>Travel Consultant</h3>
+                <p>Help people plan holidays, trips and international travel.</p>
+            </article>
+
+            <article class="card" data-category="hospitality">
+                <div class="emoji">👨‍🍳</div>
+                <h3>Chef</h3>
+                <p>Prepare food and create dishes in restaurants and kitchens.</p>
+            </article>
+
+            <article class="card" data-category="hospitality">
+                <div class="emoji">🎉</div>
+                <h3>Event Manager</h3>
+                <p>Organise conferences, festivals, concerts and special events.</p>
+            </article>
+
+            <article class="card" data-category="hospitality">
+                <div class="emoji">🚢</div>
+                <h3>Tourism Manager</h3>
+                <p>Develop travel experiences and manage tourism destinations.</p>
+            </article>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- ==========================================
+         FOOTER
+    =========================================== -->
+
+    <div id="footer-placeholder"></div>
+
+
+    <!-- JAVASCRIPT -->
+    <script src="link.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
+
+

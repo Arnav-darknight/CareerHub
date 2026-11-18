@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GirlCode Future | Your Future Starts Here</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    
+
+<section id="register" class="pale">
+  <h2>💜 Join GirlCode Future</h2>
+  <p class="intro">
+    Start your technology journey! Create your demonstration profile below.
+  </p>
+
+  <div class="lesson-area">
+    <form id="registerForm">
+      <h3>🌸 Create Your Account</h3>
+
+      <label for="girlName">First name or nickname</label>
+      <input
+        id="girlName"
+        type="text"
+        maxlength="30"
+        placeholder="What should we call you?"
+        required
+      >
+
+      <label for="girlAge">Choose your age group</label>
+      <select id="girlAge" required>
+        <option value="">Select your age group</option>
+        <option value="8–12">8–12 years</option>
+        <option value="13–15">13–15 years</option>
+        <option value="16–18">16–18 years</option>
+      </select>
+
+      <label for="girlEmail">Email address (optional)</label>
+      <input
+        id="girlEmail"
+        type="email"
+        placeholder="Email address"
+      >
+
+      <label for="girlPassword">Create a demonstration password</label>
+      <input
+        id="girlPassword"
+        type="password"
+        minlength="8"
+        placeholder="At least 8 characters"
+        required
+      >
+
+      <label for="girlConfirm">Confirm password</label>
+      <input
+        id="girlConfirm"
+        type="password"
+        minlength="8"
+        placeholder="Enter password again"
+        required
+      >
+
+      <button class="button" type="submit">
+        Create My Profile ✨
+      </button>
+
+      <p id="registerMessage"
+         class="result"
+         aria-live="polite"></p>
+    </form>
+
+    <div id="welcomePanel" hidden>
+      <h3>🎉 Welcome to GirlCode Future!</h3>
+      <p id="welcomeText"></p>
+      <p>You're ready to explore, learn and create!</p>
+      <a href="#academy" class="button">Start Learning 💜</a>
+      <button class="button pink" type="button"
+        onclick="resetDemoProfile()">Start Again</button>
+    </div>
+
+    <p class="small">
+      Privacy notice: This is a demonstration only. Nothing is saved,
+      transmitted or used to create a real account. Do not enter a real
+      email address or personal password.
+    </p>
+  </div>
+</section>
+
+<style>
+#register .lesson-area {
+  max-width:520px;
+}
+#register label {
+  display:block;
+  margin:13px 0 5px;
+  font-weight:bold;
+  color:#35205e;
+}
+#register input,
+#register select {
+  width:100%;
+  padding:13px;
+  border:1px solid #d9c8ee;
+  border-radius:10px;
+  font-size:1rem;
+  background:white;
+}
+#register form .button {
+  margin-top:20px;
+}
+#register .small {
+  margin-top:22px;
+  color:#765f8e;
+}
+</style>
+
+<script>
+document.getElementById("registerForm")
+.addEventListener("submit", function(event) {
+  event.preventDefault();
+
+  const name = document.getElementById("girlName").value.trim();
+  const age = document.getElementById("girlAge").value;
+  const password = document.getElementById("girlPassword").value;
+  const confirm = document.getElementById("girlConfirm").value;
+  const message = document.getElementById("registerMessage");
+
+  if (!name || !age) {
+    message.textContent = "Please complete the required fields.";
+    return;
+  }
+
+  if (password.length < 8) {
+    message.textContent = "Your demonstration password must be at least 8 characters.";
+    return;
+  }
+
+  if (password !== confirm) {
+    message.textContent = "Your passwords do not match. Try again!";
+    return;
+  }
+
+  // No account, password or personal details are stored.
+  document.getElementById("registerForm").reset();
+  document.getElementById("registerForm").hidden = true;
+  document.getElementById("welcomeText").textContent =
+    "Hello, " + name + "! Your demonstration profile is ready.";
+
+  document.getElementById("welcomePanel").hidden = false;
+});
+
+function resetDemoProfile() {
+  document.getElementById("welcomePanel").hidden = true;
+  document.getElementById("registerForm").hidden = false;
+  document.getElementById("registerMessage").textContent = "";
+}
+</script>
+
+
+    <div id="footer-placeholder"></div>
+
+  <script src="link.js"></script>
+
+    <script src="script.js"></script>
+</body>
+</html>

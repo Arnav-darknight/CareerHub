@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GirlCode Future | Career &amp; Subject Challenges</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .code-snippet {
+            background: #1e293b;
+            color: #ffffff;
+            padding: 0.9rem;
+            border-radius: 10px;
+            font-family: monospace;
+            font-size: 1rem;
+            margin: 1rem 0;
+            text-align: left;
+            overflow-x: auto;
+        }
+        .answer-input {
+            padding: 0.75rem 1rem;
+            border-radius: 999px;
+            border: 2px solid #cbd5e1;
+            font-size: 1rem;
+            margin: 0.35rem;
+            text-align: center;
+        }
+        .feedback-msg {
+            margin-top: 1rem;
+            font-weight: bold;
+            min-height: 1.5em;
+        }
+        .score-pill {
+            display: inline-block;
+            margin-top: 0.75rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <section id="challenges-page">
+        <h2 class="section-title">🧩 Explore Career &amp; Subject Challenges</h2>
+        <p class="section-intro">
+            Pick any career category from our Learn directory below to test your knowledge
+            with mini puzzles, scenarios, and problem-solving challenges!
+        </p>
+
+        <!-- CATEGORY FILTERS (Matching learn.html) -->
+        <div class="career-controls">
+            <div class="career-filters">
+                <button type="button" class="filter-btn active" onclick="selectChallengeCategory('technology', this)">💻 Technology</button>
+                <button type="button" class="filter-btn" onclick="selectChallengeCategory('engineering', this)">⚙️ Engineering</button>
+                <button type="button" class="filter-btn" onclick="selectChallengeCategory('science', this)">🔬 Science</button>
+                <button type="button" class="filter-btn" onclick="selectChallengeCategory('healthcare', this)">🏥 Healthcare</button>
+                <button type="button" class="filter-btn" onclick="selectChallengeCategory('business', this)">💼 Business</button>
+                <button type="button" class="filter-btn" onclick="selectChallengeCategory('law', this)">⚖️ Law</button>
+                <button type="button" class="filter-btn" onclick="selectChallengeCategory('arts', this)">🎨 Arts &amp; Media</button>
+                <button type="button" class="filter-btn" onclick="selectChallengeCategory('education', this)">📚 Education</button>
+                <button type="button" class="filter-btn" onclick="selectChallengeCategory('environment', this)">🌱 Environment</button>
+                <button type="button" class="filter-btn" onclick="selectChallengeCategory('architecture', this)">🏗️ Architecture</button>
+                <button type="button" class="filter-btn" onclick="selectChallengeCategory('aviation', this)">✈️ Aviation &amp; Defence</button>
+                <button type="button" class="filter-btn" onclick="selectChallengeCategory('sports', this)">🏆 Sports</button>
+                <button type="button" class="filter-btn" onclick="selectChallengeCategory('hospitality', this)">🏨 Hospitality</button>
+                <button type="button" class="filter-btn" onclick="selectChallengeCategory('social', this)">🌍 Social Sciences</button>
+            </div>
+
+            <p class="score-pill" aria-live="polite">
+                ⭐ <span id="active-cat-title">Technology</span> Score: <span id="cat-score">0</span> / 3
+            </p>
+        </div>
+
+        <!-- DYNAMIC CHALLENGES AREA -->
+        <div id="challenge-list"></div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <a class="button" href="learn.html">Explore All Careers on Learn 🔮</a>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="link.js"></script>
+    <script src="script.js"></script>
+    <script>
+        const careerChallenges = {
+            technology: {
+                title: "Technology",
+                items: [
+                    {
+                        heading: "1. 🌐 Web & Software Developer",
+                        intro: "Web and Software Developers build apps, websites, and digital tools.",
+                        question: "What is missing from the closing tag in this HTML snippet?",
+                        code: "<h1>Welcome to GirlCode!<h1>",
+                        type: "mcq",
+                        options: [
+                            { text: "A) A forward slash (/) in </h1>", correct: true },
+                            { text: "B) A semicolon at the end", correct: false },
+                            { text: "C) Capital letters", correct: false }
+                        ],
+                        win: "🐛 Bug squashed! Closing HTML tags always need a forward slash like </h1>.",
+                        lose: "🔍 Look closely at the second <h1> tag—how does the browser know the heading ends?"
+                    },
+                    {
+                        heading: "2. 🎨 UX Designer",
+                        intro: "UX Designers make websites and apps easier and more enjoyable to use.",
+                        question: "Which choice improves accessibility for people using screen readers or struggling with low vision?",
+                        type: "mcq",
+                        options: [
+                            { text: "A) Light grey text on a white background", correct: false },
+                            { text: "B) High-contrast colours and clear button labels", correct: true },
+                            { text: "C) Tiny buttons hidden in the corner", correct: false }
+                        ],
+                        win: "🎨 Spot on! Good UX design ensures everyone can read and navigate with ease.",
+                        lose: "🤔 Think about what makes a screen easiest to read and tap!"
+                    },
+                    {
+                        heading: "3. 🔐 Cybersecurity & Digital Forensics",
+                        intro: "Cybersecurity Experts and Digital Forensics Investigators protect information and systems.",
+                        promptPlaceholder: "Type the word...",
+                        question: "What do we call scrambling secret data so hackers cannot read it without a key? (Starts with E)",
+                        type: "text",
+                        answers: ["ENCRYPTION", "ENCRYPT"],
+                        win: "🔐 Nailed it! Encryption keeps passwords, messages, and bank details safe.",
+                        lose: "💡 Hint: It starts with 'En...' and turns readable text into secret cipher text!"
+                    }
+                ]
+            },
+            engineering: {
+                title: "Engineering",
+                items: [
+                    {
+                        heading: "1. 🏗️ Civil & Structural Engineer",
+                        intro: "Civil and Structural Engineers make sure bridges and buildings are safe and strong.",
+                        question: "Which geometric shape is strongest for bridge frames because it spreads weight without bending?",
+                        type: "mcq",
+                        options: [
+                            { text: "A) Square", correct: false },
+                            { text: "B) Triangle", correct: true },
+                            { text: "C) Circle", correct: false }
+                        ],
+                        win: "🌉 Spot on! Triangles lock angles firmly in place under heavy loads.",
+                        lose: "📐 A square collapses sideways if pushed at a corner—try the 3-sided shape!"
+                    },
+                    {
+                        heading: "2. 🌱 Renewable Energy Engineer",
+                        intro: "Renewable Energy Engineers develop cleaner power solutions like wind and solar.",
+                        question: "What type of energy do photovoltaic solar panels convert directly into electricity?",
+                        type: "mcq",
+                        options: [
+                            { text: "A) Sunlight", correct: true },
+                            { text: "B) Ocean tides", correct: false },
+                            { text: "C) Geothermal heat", correct: false }
+                        ],
+                        win: "☀️ Awesome! Solar panels capture light energy from the Sun.",
+                        lose: "🤔 Think about why solar panels are installed on sunny rooftops!"
+                    },
+                    {
+                        heading: "3. 🦾 Mechatronics & Robotics Engineer",
+                        intro: "Mechatronics Engineers combine mechanics, electronics, and computing to build smart machines.",
+                        question: "What 5-letter sensor technology bounces sound waves off objects to measure distance—just like a bat?",
+                        type: "text",
+                        answers: ["SONAR"],
+                        win: "🤖 Brilliant! Sonar uses sound echoes to help robots and submarines navigate.",
+                        lose: "💡 Hint: Starts with S, ends with R, and uses sound waves!"
+                    }
+                ]
+            },
+            science: {
+                title: "Science",
+                items: [
+                    {
+                        heading: "1. 🧬 Geneticist & Bioinformatics",
+                        intro: "Geneticists study genes, DNA, and how characteristics are inherited.",
+                        question: "What shape is a molecule of human DNA famously known as?",
+                        type: "mcq",
+                        options: [
+                            { text: "A) A flat pyramid", correct: false },
+                            { text: "B) A double helix (twisted ladder)", correct: true },
+                            { text: "C) A solid cube", correct: false }
+                        ],
+                        win: "🧬 Spot on! DNA forms a twisted ladder shape called a double helix.",
+                        lose: "🔬 Think of a spiral staircase or twisted ladder!"
+                    },
+                    {
+                        heading: "2. 🔭 Astronomer & Physicist",
+                        intro: "Astronomers and Physicists investigate planets, stars, and the laws of nature.",
+                        question: "Which planet in our solar system is famous for its bright rings of ice and rock?",
+                        type: "mcq",
+                        options: [
+                            { text: "A) Saturn", correct: true },
+                            { text: "B) Venus", correct: false },
+                            { text: "C) Mercury", correct: false }
+                        ],
+                        win: "🪐 Nailed it! Saturn's wide ring system is visible even through a small telescope.",
+                        lose: "🔭 Think of the gas giant famous for its giant rings!"
+                    },
+                    {
+                        heading: "3. 🧮 Mathematician & Statistician",
+                        intro: "Mathematicians and Statisticians analyse patterns and numbers.",
+                        question: "What is the next number in the Fibonacci sequence: 1, 1, 2, 3, 5, 8, ...?",
+                        type: "text",
+                        answers: ["13"],
+                        win: "🌻 Genius! Each number is the sum of the two before it (5 + 8 = 13).",
+                        lose: "➕ Try adding the last two numbers together: 5 + 8 = ?"
+                    }
+                ]
+            },
+            healthcare: {
+                title: "Healthcare",
+                items: [
+                    {
+                        heading: "1. 🩺 Doctor & Biomedical Scientist",
+                        intro: "Doctors and Biomedical Scientists diagnose and prevent illnesses.",
+                        question: "What do vaccines train your immune system to recognise and fight?",
+                        type: "mcq",
+                        options: [
+                            { text: "A) Specific viruses or bacteria", correct: true },
+                            { text: "B) Fractured bones", correct: false },
+                            { text: "C) Poor eyesight", correct: false }
+                        ],
+                        win: "🩺 Spot on! Vaccines safely prepare your body's defences before you get sick.",
+                        lose: "🤔 Think about how your immune system learns to fight germs!"
+                    },
+                    {
+                        heading: "2. 🏥 Hospital Imaging Tech",
+                        intro: "Surgeons and specialists use advanced medical imaging to look inside the body.",
+                        question: "Which hospital scan uses strong magnets and radio waves instead of X-rays?",
+                        type: "mcq",
+                        options: [
+                            { text: "A) An MRI scan", correct: true },
+                            { text: "B) A stethoscope", correct: false },
+                            { text: "C) A thermometer", correct: false }
+                        ],
+                        win: "🩻 Correct! MRI stands for Magnetic Resonance Imaging.",
+                        lose: "🧲 Look for the scan that starts with M for Magnetic!"
+                    },
+                    {
+                        heading: "3. 🚑 Paramedic & Nurse",
+                        intro: "Paramedics and Nurses check vital signs to monitor a patient's health.",
+                        question: "Which organ pumps oxygen-rich blood around the human body?",
+                        type: "text",
+                        answers: ["HEART", "THE HEART"],
+                        win: "❤️ Spot on! Your heart beats roughly 100,000 times every day.",
+                        lose: "💡 Hint: It's in your chest and beats faster when you exercise!"
+                    }
+                ]
+            },
+            business: {
+                title: "Business",
+                items: [
+                    {
+                        heading: "1. 🧾 Accountant & Financial Analyst",
+                        intro: "Accountants and Financial Analysts manage budgets, profits, and business records.",
+                        question: "If an E-commerce Manager sells £500 worth of products and spends £320 on stock and delivery, what is the profit?",
+                        type: "mcq",
+                        options: [
+                            { text: "A) £820", correct: false },
+                            { text: "B) £180", correct: true },
+                            { text: "C) £220", correct: false }
+                        ],
+                        win: "💰 Nailed it! Profit = Revenue (£500) minus Costs (£320) = £180.",
+                        lose: "🧮 Subtract the costs (£320) from the sales (£500)!"
+                    },
+                    {
+                        heading: "2. 📦 Supply Chain Manager",
+                        intro: "Supply Chain Managers oversee how products are sourced, transported, and delivered.",
+                        question: "Which action helps make a company's supply chain more sustainable?",
+                        type: "mcq",
+                        options: [
+                            { text: "A) Shipping half-empty lorries every hour", correct: false },
+                            { text: "B) Sourcing materials locally and using recyclable packaging", correct: true },
+                            { text: "C) Throwing away unsold inventory", correct: false }
+                        ],
+                        win: "📦 Spot on! Shorter transport routes and recyclable materials cut waste and emissions.",
+                        lose: "🌱 Think about which choice reduces fuel use and packaging waste!"
+                    },
+                    {
+                        heading: "3. 🚀 Entrepreneur & Marketing",
+                        intro: "Entrepreneurs turn new ideas into growing businesses.",
+                        question: "What 6-letter word describes the total amount of money a business plans to spend over a set period? (Starts with B)",
+                        type: "text",
+                        answers: ["BUDGET"],
+                        win: "📊 Brilliant! Planning a careful budget keeps any new startup on track.",
+                        lose: "💡 Hint: Starts with B and rhymes with 'fudget'!"
+                    }
+                ]
+            },
+            law: {
+                title: "Law",
+                items: [
+                    {
+                        heading: "1. ⚖️ Lawyer & Judge",
+                        intro: "Lawyers and Judges ensure laws are applied fairly in the justice system.",
+                        question: "In a criminal trial, what does 'presumption of innocence' mean?",
+                        type: "mcq",
+                        options: [
+                            { text: "A) Someone is treated as innocent until proven guilty", correct: true },
+                            { text: "B) No evidence is allowed in court", correct: false },
+                            { text: "C) Judges decide cases by flipping a coin", correct: false }
+                        ],
+                        win: "⚖️ Spot on! Every person has the right to a fair trial based on evidence.",
+                        lose: "📜 Think about the core principle of fairness in court!"
+                    },
+                    {
+                        heading: "2. 🌍 Diplomat",
+                        intro: "Diplomats represent their country and build peaceful relationships with other nations.",
+                        question: "What is the main goal of international diplomacy?",
+                        type: "mcq",
+                        options: [
+                            { text: "A) Solving global disagreements through negotiation and cooperation", correct: true },
+                            { text: "B) Closing all borders permanently", correct: false },
+                            { text: "C) Ignoring international treaties", correct: false }
+                        ],
+                        win: "🌍 Nailed it! Diplomats use communication and negotiation to solve shared problems.",
+                        lose: "🤝 Think about how countries work together peacefully!"
+                    },
+                    {
+                        heading: "3. 🔎 Criminologist & Intelligence Analyst",
+                        intro: "Criminologists and Intelligence Analysts study patterns to keep communities safe.",
+                        question: "What 8-letter word describes facts, objects, or digital clues used to prove something in court? (Starts with E)",
+                        type: "text",
+                        answers: ["EVIDENCE"],
+                        win: "🔎 Correct! Reliable evidence is essential for solving investigations fairly.",
+                        lose: "💡 Hint: Starts with 'Ev...'—detectives and forensic scientists gather it!"
+                    }
+                ]
+            },
+            arts: {
+                title: "Arts & Media",
+                items: [
+                    {
+                        heading: "1. 🖌️ Graphic Designer",
+                        intro: "Graphic Designers create visual identities, posters, and digital artwork.",
+                        question: "Which three colours are the primary colours of light used in digital screens (RGB)?",
+                        type: "mcq",
+                        options: [
+                            { text: "A) Red, Green, and Blue", correct: true },
+                            { text: "B) Red, Yellow, and Brown", correct: false },
+                            { text: "C) Pink, Purple, and White", correct: false }
+                        ],
+                        win: "🎨 Spot on! Digital screens mix Red, Green, and Blue light to create millions of colours.",
+                        lose: "💡 Look at the initials R-G-B in the question!"
+                    },
+                    {
+                        heading: "2. 🎞️ Animator & 3D Artist",
+                        intro: "Animators and 3D Artists bring characters and worlds to life.",
+                        question: "In animation, what does 'FPS' stand for?",
+                        type: "mcq",
+                        options: [
+                            { text: "A) Frames Per Second", correct: true },
+                            { text: "B) Fast Paint Studio", correct: false },
+                            { text: "C) Final Picture Sketch", correct: false }
+                        ],
+                        win: "🎬 Nailed it! Higher Frames Per Second (like 24 or 60 FPS) makes movement look smooth.",
+                        lose: "🎞️ Think about how many still drawings ('frames') play each second!"
+                    },
+                    {
+                        heading: "3. 📰 Journalist & Broadcaster",
+                        intro: "Journalists and Broadcasters research and report accurate news.",
+                        question: "Before publishing a story, what must a responsible Journalist always check about their sources? (4-letter word starting with F)",
+                        type: "text",
+                        answers: ["FACT", "FACTS"],
+                        win: "📰 Brilliant! Fact-checking ensures news reports are trustworthy and accurate.",
+                        lose: "💡 Hint: Journalists check that every ______ is true before going live!"
+                    }
+                ]
+            },
+            education: {
+                title: "Education",
+                items: [
+                    {
+                        heading: "1. 📚 Teacher & Education Consultant",
+                        intro: "Teachers and Education Consultants design lessons that help every student thrive.",
+                        question: "Why do great teachers use a mix of visuals, hands-on activities, and discussion?",
+                        type: "mcq",
+                        options: [
+                            { text: "A) Because different learners understand ideas in different ways", correct: true },
+                            { text: "B) To make lessons take twice as long", correct: false },
+                            { text: "C) So nobody has to ask questions", correct: false }
+                        ],
+                        win: "📚 Spot on! Active, varied learning helps concepts stick for every student.",
+                        lose: "💡 Think about how hands-on coding challenges help you learn faster than just reading!"
+                    },
+                    {
+                        heading: "2. 🎓 University Lecturer",
+                        intro: "University Lecturers teach degree students and lead original research.",
+                        question: "When a Lecturer publishes new research, other experts review it first to check accuracy. What is this called?",
+                        type: "mcq",
+                        options: [
+                            { text: "A) Peer review", correct: true },
+                            { text: "B) Speed reading", correct: false },
+                            { text: "C) Guesswork", correct: false }
+                        ],
+                        win: "🎓 Nailed it! Peer review keeps academic and scientific discoveries reliable.",
+                        lose: "🔍 It's reviewed by fellow researchers ('peers') before publication!"
+                    },
+                    {
+                        heading: "3. 🧑‍🏫 Building Confidence",
+                        intro: "Educators help students develop a growth mindset.",
+                        question: "In coding and learning, mistakes aren't failures—they are opportunities to learn and ______! (7-letter word starting with I)",
+                        type: "text",
+                        answers: ["IMPROVE"],
+                        win: "🌟 Spot on! Every bug you fix helps you improve your skills.",
+                        lose: "💡 Hint: Starts with 'Imp...' and means to get better!"
+                    }
+                ]
+            },
+            environment: {
+                title: "Environment",
+                items: [
+                    {
+                        heading: "1. 🌍 Climate & Environmental Scientist",
+                        intro: "Climate Scientists research weather trends and ways to protect our planet.",
+                        question: "Which gas do trees and ocean plants absorb from the atmosphere during photosynthesis?",
+                        type: "mcq",
+                        options: [
+                            { text: "A) Carbon dioxide (CO₂)", correct: true },
+                            { text: "B) Helium", correct: false },
+                            { text: "C) Neon", correct: false }
+                        ],
+                        win: "🌳 Spot on! Forests and oceans act as vital carbon sinks.",
+                        lose: "🌱 Plants take in CO₂ and release oxygen!"
+                    },
+                    {
+                        heading: "2. 🐘 Wildlife Conservationist",
+                        intro: "Wildlife Conservationists protect endangered species and natural habitats.",
+                        question: "What do scientists call the variety of different plant and animal life in an ecosystem?",
+                        type: "mcq",
+                        options: [
+                            { text: "A) Biodiversity", correct: true },
+                            { text: "B) Astronomy", correct: false },
+                            { text: "C) Architecture", correct: false }
+                        ],
+                        win: "🦋 Nailed it! High biodiversity keeps ecosystems healthy and resilient.",
+                        lose: "🌿 Look for the word combining 'Bio' (life) and 'diversity' (variety)!"
+                    },
+                    {
+                        heading: "3. ♻️ Sustainability Consultant",
+                        intro: "Sustainability Consultants help organisations cut waste and protect resources.",
+                        question: "Complete the classic environmental motto: Reduce, Reuse, ______!",
+                        type: "text",
+                        answers: ["RECYCLE"],
+                        win: "♻️ Correct! Reducing, reusing, and recycling keeps valuable materials out of landfills.",
+                        lose: "💡 Hint: Starts with 'Re...' and turns old paper, glass, or metal into new items!"
+                    }
+                ]
+            },
+            architecture: {
+                title: "Architecture",
+                items: [
+                    {
+                        heading: "1. 🏛️ Architect",
+                        intro: "Architects design buildings that are safe, practical, and inspiring.",
+                        question: "What do Architects create to test how a building will look and fit together before construction starts?",
+                        type: "mcq",
+                        options: [
+                            { text: "A) Blueprints and 3D scale models", correct: true },
+                            { text: "B) Restaurant menus", correct: false },
+                            { text: "C) Weather forecasts", correct: false }
+                        ],
+                        win: "🏛️ Spot on! Detailed plans and 3D models let architects spot design issues early.",
+                        lose: "📐 Think about the detailed drawings and models architects use!"
+                    },
+                    {
+                        heading: "2. 🏙️ Urban Planner",
+                        intro: "Urban Planners design towns and cities to be great places to live.",
+                        question: "Which feature helps make a modern city healthier and greener for residents?",
+                        type: "mcq",
+                        options: [
+                            { text: "A) Parks, cycle lanes, and reliable public transport", correct: true },
+                            { text: "B) Removing all pavements and trees", correct: false },
+                            { text: "C) Building factories inside playgrounds", correct: false }
+                        ],
+                        win: "🏙️ Nailed it! Green spaces and safe transport improve wellbeing and cut pollution.",
+                        lose: "🌳 Think about what makes a neighbourhood safe, clean, and enjoyable to walk in!"
+                    },
+                    {
+                        heading: "3. 📐 Quantity Surveyor",
+                        intro: "Quantity Surveyors manage construction budgets and material calculations.",
+                        question: "A room floor is 6 metres long and 4 metres wide. How many square metres (m²) of flooring are needed?",
+                        type: "text",
+                        answers: ["24", "24M2", "24 M2"],
+                        win: "📐 Spot on! Area = length × width (6 × 4 = 24 m²).",
+                        lose: "🧮 Multiply the length (6) by the width (4)!"
+                    }
+                ]
+            },
+            aviation: {
+                title: "Aviation & Defence",
+                items: [
+                    {
+                        heading: "1. ✈️ Commercial Pilot",
+                        intro: "Pilots use physics, navigation, and teamwork to fly safely around the globe.",
+                        question: "What upward aerodynamic force is created by an aircraft's wings moving through the air?",
+                        type: "mcq",
+                        options: [
+                            { text: "A) Lift", correct: true },
+                            { text: "B) Friction", correct: false },
+                            { text: "C) Magnetism", correct: false }
+                        ],
+                        win: "✈️ Spot on! Lift overcomes gravity so the aircraft can rise into the sky.",
+                        lose: "🛫 Think of the 4-letter word that means raising something upward!"
+                    },
+                    {
+                        heading: "2. 🛰️ Satellite Engineer & Astronaut",
+                        intro: "Satellite Engineers and Astronauts work beyond Earth's atmosphere.",
+                        question: "How do GPS satellites help phones and ships find their exact location on Earth?",
+                        type: "mcq",
+                        options: [
+                            { text: "A) By sending timed radio signals from orbit", correct: true },
+                            { text: "B) By dropping giant anchors", correct: false },
+                            { text: "C) By shining spotlights through clouds", correct: false }
+                        ],
+                        win: "🛰️ Nailed it! Measuring signal travel time from multiple satellites pinpoints your position.",
+                        lose: "📡 Satellites communicate with receivers using high-speed radio signals!"
+                    },
+                    {
+                        heading: "3. 🛫 Air Traffic Controller",
+                        intro: "Air Traffic Controllers coordinate aircraft safely on runways and in the sky.",
+                        question: "What 5-letter system uses radio waves to detect the position and speed of aircraft in the sky? (Starts with R)",
+                        type: "text",
+                        answers: ["RADAR"],
+                        win: "🛫 Brilliant! Radar tracks aircraft in all weather conditions day and night.",
+                        lose: "💡 Hint: It's a palindrome (spelled the same forwards and backwards) starting with R!"
+                    }
+                ]
+            },
+            sports: {
+                title: "Sports",
+                items: [
+                    {
+                        heading: "1. 📊 Sports Analyst",
+                        intro: "Sports Analysts use statistics and video data to help teams win.",
+                        question: "A football striker takes 20 shots in a tournament and scores 5 goals. What is their shot conversion rate?",
+                        type: "mcq",
+                        options: [
+                            { text: "A) 25%", correct: true },
+                            { text: "B) 50%", correct: false },
+                            { text: "C) 5%", correct: false }
+                        ],
+                        win: "📊 Spot on! 5 out of 20 is 1/4, which equals 25%.",
+                        lose: "🧮 Divide 5 by 20 (which is 0.25) and multiply by 100!"
+                    },
+                    {
+                        heading: "2. 🧘 Exercise Physiologist",
+                        intro: "Exercise Physiologists study how training and nutrition affect the body.",
+                        question: "Why do athletes warm up before intense exercise?",
+                        type: "mcq",
+                        options: [
+                            { text: "A) To increase blood flow to muscles and reduce injury risk", correct: true },
+                            { text: "B) To make themselves tired before the match starts", correct: false },
+                            { text: "C) To lower their heart rate to zero", correct: false }
+                        ],
+                        win: "🏃 Nailed it! Warming up gradually raises heart rate and prepares muscles safely.",
+                        lose: "💪 Think about how warming up protects muscles and joints!"
+                    },
+                    {
+                        heading: "3. 🏋️ Personal Trainer & Coach",
+                        intro: "Coaches and Trainers help athletes stay hydrated and energised.",
+                        question: "What essential nutrient makes up about 60% of the human body and keeps athletes hydrated?",
+                        type: "text",
+                        answers: ["WATER", "H2O"],
+                        win: "💧 Correct! Staying hydrated is vital for focus, endurance, and recovery.",
+                        lose: "💡 Hint: Every athlete keeps a bottle of this on the sidelines!"
+                    }
+                ]
+            },
+            hospitality: {
+                title: "Hospitality",
+                items: [
+                    {
+                        heading: "1. 👨‍🍳 Chef",
+                        intro: "Chefs combine culinary creativity with food science and precision.",
+                        question: "Why do Chefs keep raw meat and ready-to-eat vegetables on separate chopping boards?",
+                        type: "mcq",
+                        options: [
+                            { text: "A) To prevent cross-contamination and food poisoning", correct: true },
+                            { text: "B) Because vegetables only fit on green boards", correct: false },
+                            { text: "C) To save washing-up liquid", correct: false }
+                        ],
+                        win: "👨‍🍳 Spot on! Food hygiene keeps bacteria from spreading between ingredients.",
+                        lose: "🧼 Think about kitchen safety and stopping germs from spreading!"
+                    },
+                    {
+                        heading: "2. 🎉 Event Manager",
+                        intro: "Event Managers plan festivals, conferences, and concerts from start to finish.",
+                        question: "What should an Event Manager always prepare in case outdoor festival weather turns rainy?",
+                        type: "mcq",
+                        options: [
+                            { text: "A) A contingency (backup) plan with indoor spaces or marquees", correct: true },
+                            { text: "B) Cancel the event without telling anyone", correct: false },
+                            { text: "C) Pretend it isn't raining", correct: false }
+                        ],
+                        win: "🎉 Nailed it! Great Event Managers always have a Plan B ready.",
+                        lose: "☔ Think about planning ahead for unexpected surprises!"
+                    },
+                    {
+                        heading: "3. 🏨 Hotel & Tourism Manager",
+                        intro: "Hotel and Tourism Managers create welcoming experiences for travellers.",
+                        question: "If a hotel has 80 rooms and 60 rooms are booked tonight, how many rooms are still available?",
+                        type: "text",
+                        answers: ["20", "20 ROOMS"],
+                        win: "🏨 Spot on! 80 total rooms minus 60 booked = 20 rooms free.",
+                        lose: "🧮 Subtract 60 from 80!"
+                    }
+                ]
+            },
+            social: {
+                title: "Social Sciences",
+                items: [
+                    {
+                        heading: "1. 🏺 Archaeologist & Historian",
+                        intro: "Archaeologists and Historians uncover evidence of past human civilisations.",
+                        question: "What do Archaeologists call human-made objects—like ancient pottery or tools—found during a dig?",
+                        type: "mcq",
+                        options: [
+                            { text: "A) Artefacts", correct: true },
+                            { text: "B) Meteorites", correct: false },
+                            { text: "C) Satellites", correct: false }
+                        ],
+                        win: "🏺 Spot on! Artefacts give historians clues about how people lived centuries ago.",
+                        lose: "🔍 Look for the word starting with 'Art...' used for ancient objects!"
+                    },
+                    {
+                        heading: "2. 🌏 Geographer",
+                        intro: "Geographers study Earth's landscapes, climates, and human populations.",
+                        question: "What imaginary line at 0° latitude divides Earth into the Northern and Southern Hemispheres?",
+                        type: "mcq",
+                        options: [
+                            { text: "A) The Equator", correct: true },
+                            { text: "B) The Tropic of Cancer", correct: false },
+                            { text: "C) The International Date Line", correct: false }
+                        ],
+                        win: "🌏 Nailed it! The Equator circles the middle of the globe.",
+                        lose: "🗺️ Think of the line right around the middle of Earth!"
+                    },
+                    {
+                        heading: "3. 🗣️ Translator & International Relations",
+                        intro: "Translators help people across cultures communicate clearly.",
+                        question: "What 8-letter word describes someone who can speak two languages fluently? (Starts with B)",
+                        type: "text",
+                        answers: ["BILINGUAL"],
+                        win: "🗣️ Brilliant! Being bilingual opens doors across global careers and cultures.",
+                        lose: "💡 Hint: 'Bi-' means two, and 'lingual' refers to language!"
+                    }
+                ]
+            }
+        };
+
+        let currentCatKey = "technology";
+        let solvedTracker = {};
+
+        function selectChallengeCategory(catKey, btn) {
+            currentCatKey = catKey;
+            solvedTracker = {};
+
+            document.querySelectorAll(".career-filters .filter-btn").forEach(b => b.classList.remove("active"));
+            if (btn) btn.classList.add("active");
+
+            const catData = careerChallenges[catKey];
+            document.getElementById("active-cat-title").textContent = catData.title;
+            document.getElementById("cat-score").textContent = "0";
+
+            const listEl = document.getElementById("challenge-list");
+            listEl.innerHTML = "";
+
+            catData.items.forEach((item, idx) => {
+                const wrapper = document.createElement("div");
+                wrapper.className = "challenge";
+                wrapper.style.marginBottom = "2rem";
+
+                let controlsHTML = "";
+                if (item.type === "mcq") {
+                    controlsHTML = item.options.map(opt =>
+                        `<button type="button" class="button" onclick="checkChallengeMCQ(${idx}, ${opt.correct})">${opt.text}</button>`
+                    ).join(" ");
+                } else {
+                    controlsHTML = `
+                        <input type="text" id="chal-input-${idx}" class="answer-input" placeholder="${item.promptPlaceholder || 'Type your answer...'}">
+                        <button type="button" class="button pink" onclick="checkChallengeText(${idx})">Check Answer ✨</button>
+                    `;
+                }
+
+                const codeHTML = item.code
+                    ? `<pre class="code-snippet">${item.code.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</pre>`
+                    : "";
+
+                wrapper.innerHTML = `
+                    <h3>${item.heading}</h3>
+                    <p style="margin-bottom: 1rem;">${item.intro}</p>
+                    <p><strong>${item.question}</strong></p>
+                    ${codeHTML}
+                    <div style="margin-top: 1rem;">${controlsHTML}</div>
+                    <p id="chal-msg-${idx}" class="feedback-msg" aria-live="polite"></p>
+                `;
+
+                listEl.appendChild(wrapper);
+            });
+        }
+
+        function checkChallengeMCQ(idx, isCorrect) {
+            const item = careerChallenges[currentCatKey].items[idx];
+            const msgEl = document.getElementById("chal-msg-" + idx);
+
+            if (isCorrect) {
+                msgEl.textContent = item.win;
+                msgEl.style.color = "#059669";
+                solvedTracker[idx] = true;
+                document.getElementById("cat-score").textContent = Object.keys(solvedTracker).length;
+            } else {
+                msgEl.textContent = item.lose;
+                msgEl.style.color = "#db2777";
+            }
+        }
+
+        function checkChallengeText(idx) {
+            const item = careerChallenges[currentCatKey].items[idx];
+            const inputEl = document.getElementById("chal-input-" + idx);
+            const msgEl = document.getElementById("chal-msg-" + idx);
+            const userVal = inputEl.value.trim().toUpperCase();
+
+            if (!userVal) {
+                msgEl.textContent = "✏️ Type your answer in the box first!";
+                msgEl.style.color = "#475569";
+            } else if (item.answers.includes(userVal)) {
+                msgEl.textContent = item.win;
+                msgEl.style.color = "#059669";
+                solvedTracker[idx] = true;
+                document.getElementById("cat-score").textContent = Object.keys(solvedTracker).length;
+            } else {
+                msgEl.textContent = item.lose;
+                msgEl.style.color = "#db2777";
+            }
+        }
+
+        // Load Technology challenges by default when page opens
+        selectChallengeCategory("technology", document.querySelector(".career-filters .filter-btn"));
+    </script>
+</body>
+</html>

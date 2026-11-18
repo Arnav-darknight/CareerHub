@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GirlCode Future | Women in STEM Role Models</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .role-model-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .portrait-wrapper {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 1rem;
+            border: 4px solid #f3e8ff;
+            box-shadow: 0 4px 12px rgba(108, 43, 217, 0.15);
+            background: #f3e8ff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .portrait-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+        }
+
+        .field-pill {
+            display: inline-block;
+            background: #fdf2f8;
+            color: #be185d;
+            font-weight: 700;
+            font-size: 0.78rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            margin-bottom: 0.6rem;
+        }
+
+        .years-label {
+            font-size: 0.82rem;
+            color: #64748b;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+        }
+
+        .impact-highlight {
+            margin-top: auto;
+            padding-top: 0.75rem;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #4c1d95;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <section id="role-models-page">
+        <h2 class="section-title">👩‍💻 Women Who Changed The World Forever</h2>
+        <p class="section-intro">
+            From early computer programming and spaceflight to life-saving medicine and wireless Wi-Fi,
+            meet the trailblazing women whose ideas shaped our modern world.
+        </p>
+
+        <!-- FILTER BUTTONS -->
+        <div class="career-controls">
+            <div class="career-filters">
+                <button type="button" class="filter-btn active" onclick="filterRoleModels('all', this)">All Role Models</button>
+                <button type="button" class="filter-btn" onclick="filterRoleModels('computing', this)">💻 Computing &amp; Tech</button>
+                <button type="button" class="filter-btn" onclick="filterRoleModels('space', this)">🚀 Space &amp; Maths</button>
+                <button type="button" class="filter-btn" onclick="filterRoleModels('science', this)">🔬 Physics &amp; Chemistry</button>
+                <button type="button" class="filter-btn" onclick="filterRoleModels('medicine', this)">🩺 Medicine &amp; Biology</button>
+            </div>
+        </div>
+
+        <!-- ROLE MODELS GRID -->
+        <div class="cards">
+
+            <!-- 1. Ada Lovelace -->
+            <article class="card role-model-card" data-field="computing">
+                <div class="portrait-wrapper">
+                    <img
+                        src="https://commons.wikimedia.org/wiki/Special:FilePath/Ada_Lovelace_portrait.jpg?width=400"
+                        alt="Portrait of Ada Lovelace"
+                        referrerpolicy="no-referrer"
+                        onerror="this.parentElement.innerHTML='💻'"
+                    >
+                </div>
+                <span class="field-pill">💻 Computing</span>
+                <h3>Ada Lovelace</h3>
+                <div class="years-label">1815 – 1852</div>
+                <p>
+                    English mathematician who wrote the world's first algorithm intended to be carried out
+                    by Charles Babbage's Analytical Engine, foreseeing that computers could create music and art.
+                </p>
+                <div class="impact-highlight">✨ First Computer Programmer</div>
+            </article>
+
+            <!-- 2. Katherine Johnson -->
+            <article class="card role-model-card" data-field="space">
+                <div class="portrait-wrapper">
+                    <img
+                        src="https://commons.wikimedia.org/wiki/Special:FilePath/Katherine_Johnson_1983.jpg?width=400"
+                        alt="Portrait of Katherine Johnson"
+                        referrerpolicy="no-referrer"
+                        onerror="this.parentElement.innerHTML='🚀'"
+                    >
+                </div>
+                <span class="field-pill">🚀 Space &amp; Maths</span>
+                <h3>Katherine Johnson</h3>
+                <div class="years-label">1918 – 2020</div>
+                <p>
+                    Brilliant NASA mathematician whose orbital mechanics calculations were critical to the
+                    success of the first US crewed spaceflights and the Apollo 11 Moon landing.
+                </p>
+                <div class="impact-highlight">✨ NASA Orbital Trajectory Pioneer</div>
+            </article>
+
+            <!-- 3. Grace Hopper -->
+            <article class="card role-model-card" data-field="computing">
+                <div class="portrait-wrapper">
+                    <img
+                        src="https://commons.wikimedia.org/wiki/Special:FilePath/Commodore_Grace_M._Hopper,_USN_(covered).jpg?width=400"
+                        alt="Portrait of Rear Admiral Grace Hopper"
+                        referrerpolicy="no-referrer"
+                        onerror="this.parentElement.innerHTML='💡'"
+                    >
+                </div>
+                <span class="field-pill">💻 Computing</span>
+                <h3>Grace Hopper</h3>
+                <div class="years-label">1906 – 1992</div>
+                <p>
+                    Computer scientist and US Navy Rear Admiral who invented one of the first compilers and
+                    helped create COBOL, proving code could be written using English-like words.
+                </p>
+                <div class="impact-highlight">✨ Pioneer of Modern Programming Languages</div>
+            </article>
+
+            <!-- 4. Marie Curie -->
+            <article class="card role-model-card" data-field="science">
+                <div class="portrait-wrapper">
+                    <img
+                        src="https://commons.wikimedia.org/wiki/Special:FilePath/Marie_Curie_c._1920s.jpg?width=400"
+                        alt="Portrait of Marie Curie"
+                        referrerpolicy="no-referrer"
+                        onerror="this.parentElement.innerHTML='⚛️'"
+                    >
+                </div>
+                <span class="field-pill">🔬 Physics &amp; Chemistry</span>
+                <h3>Marie Curie</h3>
+                <div class="years-label">1867 – 1934</div>
+                <p>
+                    Physicist and chemist who pioneered research on radioactivity, discovered polonium and
+                    radium, and became the first person to win two Nobel Prizes in two different sciences.
+                </p>
+                <div class="impact-highlight">✨ Two-Time Nobel Laureate</div>
+            </article>
+
+            <!-- 5. Hedy Lamarr -->
+            <article class="card role-model-card" data-field="computing">
+                <div class="portrait-wrapper">
+                    <img
+                        src="https://commons.wikimedia.org/wiki/Special:FilePath/Hedy_Lamarr_Publicity_Photo_for_The_Heavenly_Body_1944.jpg?width=400"
+                        alt="Portrait of Hedy Lamarr"
+                        referrerpolicy="no-referrer"
+                        onerror="this.parentElement.innerHTML='📡'"
+                    >
+                </div>
+                <span class="field-pill">💻 Wireless Tech</span>
+                <h3>Hedy Lamarr</h3>
+                <div class="years-label">1914 – 2000</div>
+                <p>
+                    Actress and self-taught inventor who co-created a frequency-hopping communication system
+                    that laid the foundation for modern Wi-Fi, GPS, and Bluetooth technologies.
+                </p>
+                <div class="impact-highlight">✨ Co-Inventor of Frequency-Hopping Tech</div>
+            </article>
+
+            <!-- 6. Rosalind Franklin -->
+            <article class="card role-model-card" data-field="medicine">
+                <div class="portrait-wrapper">
+                   <img
+                        src="https://en.wikipedia.org/wiki/Special:FilePath/Rosalind_Franklin.jpg?width=400"
+                        alt="Portrait of Rosalind Franklin"
+                        referrerpolicy="no-referrer"
+                        onerror="this.parentElement.innerHTML='🧬'"
+                    >
+                </div>
+                <span class="field-pill">🩺 Genetics &amp; Chemistry</span>
+                <h3>Rosalind Franklin</h3>
+                <div class="years-label">1920 – 1958</div>
+                <p>
+                    British chemist and X-ray crystallographer whose famous "Photo 51" was essential to
+                    discovering the double-helix structure of human DNA.
+                </p>
+                <div class="impact-highlight">✨ Key to Unlocking the Structure of DNA</div>
+            </article>
+
+            <!-- 7. Mae Jemison -->
+            <article class="card role-model-card" data-field="space">
+                <div class="portrait-wrapper">
+                    <img
+                        src="https://commons.wikimedia.org/wiki/Special:FilePath/Mae_Carol_Jemison.jpg?width=400"
+                        alt="Portrait of Dr. Mae Jemison"
+                        referrerpolicy="no-referrer"
+                        onerror="this.parentElement.innerHTML='👩‍🚀'"
+                    >
+                </div>
+                <span class="field-pill">🚀 Space &amp; Medicine</span>
+                <h3>Dr. Mae Jemison</h3>
+                <div class="years-label">Born 1956</div>
+                <p>
+                    Engineer, physician, and former NASA astronaut who became the first African American
+                    woman to travel into space aboard the Space Shuttle Endeavour in 1992.
+                </p>
+                <div class="impact-highlight">✨ First Black Woman in Space</div>
+            </article>
+
+            <!-- 8. Margaret Hamilton -->
+            <article class="card role-model-card" data-field="computing">
+                <div class="portrait-wrapper">
+                    <img
+                        src="https://commons.wikimedia.org/wiki/Special:FilePath/Margaret_Hamilton_1995.jpg?width=400"
+                        alt="Portrait of Margaret Hamilton"
+                        referrerpolicy="no-referrer"
+                        onerror="this.parentElement.innerHTML='🖥️'"
+                    >
+                </div>
+                <span class="field-pill">💻 Software Engineering</span>
+                <h3>Margaret Hamilton</h3>
+                <div class="years-label">Born 1936</div>  
+                <p>
+                    Computer scientist who led the team that built the onboard flight software for NASA's
+                    Apollo missions and helped coin the term "software engineering."
+                </p>
+                <div class="impact-highlight">✨ Led Apollo Flight Software Team</div>
+            </article>
+
+            <!-- 9. Tu Youyou -->
+            <article class="card role-model-card" data-field="medicine">
+                <div class="portrait-wrapper">
+                    <img
+                        src="https://commons.wikimedia.org/wiki/Special:FilePath/Tu_Youyou_5012-2015.jpg?width=400"
+                        alt="Portrait of Tu Youyou"
+                        referrerpolicy="no-referrer"
+                        onerror="this.parentElement.innerHTML='💊'"
+                    >
+                </div>
+                <span class="field-pill">🩺 Medicine</span>
+                <h3>Tu Youyou</h3>
+                <div class="years-label">Born 1930</div>
+                <p>
+                    Pharmaceutical chemist who discovered artemisinin, a breakthrough malaria treatment that
+                    has saved millions of lives worldwide, earning her the 2015 Nobel Prize in Medicine.
+                </p>
+                <div class="impact-highlight">✨ Discovered Life-Saving Malaria Treatment</div>
+            </article>
+
+            <!-- 10. Chien-Shiung Wu -->
+            <article class="card role-model-card" data-field="science">
+                <div class="portrait-wrapper">
+                    <img
+                        src="https://commons.wikimedia.org/wiki/Special:FilePath/Chien-shiung_Wu_(1912-1997)_C.jpg?width=400"
+                        alt="Portrait of Chien-Shiung Wu"
+                        referrerpolicy="no-referrer"
+                        onerror="this.parentElement.innerHTML='🔬'"
+                    >
+                </div>
+                <span class="field-pill">🔬 Nuclear Physics</span>
+                <h3>Chien-Shiung Wu</h3>
+                <div class="years-label">1912 – 1997</div>
+                <p>
+                    Experimental physicist known as the "First Lady of Physics," whose famous Wu Experiment
+                    overturned a major law of nuclear physics and transformed particle science.
+                </p>
+                <div class="impact-highlight">✨ Groundbreaking Experimental Physicist</div>
+            </article>
+
+            <!-- 11. Gladys West -->
+            <article class="card role-model-card" data-field="space">
+                <div class="portrait-wrapper">
+                    <img
+                        src="https://media.defense.gov/2018/Dec/07/2002070360/-1/-1/0/181206-F-ZZ999-001.JPG"
+                        alt="Portrait of Dr. Gladys West"
+                        referrerpolicy="no-referrer"
+                        onerror="this.parentElement.innerHTML='🛰️'"
+                    >
+                </div>
+                <span class="field-pill">🚀 Satellite Maths</span>
+                <h3>Dr. Gladys West</h3>
+                <div class="years-label">Born 1930</div>
+                <p>
+                    Mathematician whose precise satellite geodesy models of Earth's shape became the
+                    mathematical backbone of modern Global Positioning System (GPS) navigation.
+                </p>
+                <div class="impact-highlight">✨ Mathematician Behind GPS</div>
+            </article>
+
+            <!-- 12. Radia Perlman -->
+            <article class="card role-model-card" data-field="computing">
+                <div class="portrait-wrapper">
+                    <img
+                        src="https://commons.wikimedia.org/wiki/Special:FilePath/Radia_Perlman_2009.jpg?width=400"
+                        alt="Portrait of Radia Perlman"
+                        referrerpolicy="no-referrer"
+                        onerror="this.parentElement.innerHTML='🌐'"
+                    >
+                </div>
+                <span class="field-pill">💻 Networking</span>
+                <h3>Radia Perlman</h3>
+                <div class="years-label">Born 1951</div>
+                <p>
+                    Computer programmer and network engineer who invented the Spanning Tree Protocol (STP),
+                    a fundamental algorithm that allows massive internet networks to run smoothly.
+                </p>
+                <div class="impact-highlight">✨ Pioneer of Internet Network Architecture</div>
+            </article>
+
+        </div>
+
+        <div style="text-align: center; margin-top: 3rem;">
+            <p style="margin-bottom: 1rem;">Inspired by their stories? Test your own STEM skills or explore careers!</p>
+            <a class="button" href="challenges.html">Try Challenges 🧩</a>
+            <a class="button pink" href="learn.html">Explore Careers 🔮</a>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="link.js"></script>
+    <script src="script.js"></script>
+    <script>
+        function filterRoleModels(field, btn) {
+            document.querySelectorAll(".career-filters .filter-btn").forEach(b => b.classList.remove("active"));
+            if (btn) btn.classList.add("active");
+
+            const cards = document.querySelectorAll(".role-model-card");
+            cards.forEach(card => {
+                if (field === "all" || card.dataset.field === field) {
+                    card.style.display = "flex";
+                } else {
+                    card.style.display = "none";
+                }
+            });
+        }
+    </script>
+</body>
+</html>

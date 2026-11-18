@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GirlCode Future | Community Forum</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .forum-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Admin Bar */
+        .admin-bar {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .admin-login-box {
+            display: none;
+            align-items: center;
+            gap: 0.4rem;
+            background: #ffffff;
+            padding: 0.35rem 0.6rem;
+            border-radius: 999px;
+            border: 1px solid #cbd5e1;
+        }
+
+        .admin-login-box.open {
+            display: inline-flex;
+        }
+
+        .admin-pin-input {
+            width: 110px;
+            padding: 0.3rem 0.65rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            outline: none;
+        }
+
+        .admin-status-badge {
+            background: #fef2f2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
+            padding: 0.35rem 0.85rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .admin-toggle-btn {
+            background: #ffffff;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+            padding: 0.4rem 0.9rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .admin-toggle-btn:hover {
+            border-color: #6c2bd9;
+            color: #6c2bd9;
+        }
+
+        .delete-btn {
+            background: #fee2e2;
+            color: #b91c1c;
+            border: 1px solid #fca5a5;
+            padding: 0.3rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .delete-btn:hover {
+            background: #fecaca;
+        }
+
+        .keep-btn {
+            background: #d1fae5;
+            color: #065f46;
+            border: 1px solid #6ee7b7;
+            padding: 0.3rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .keep-btn:hover {
+            background: #a7f3d0;
+        }
+
+        /* Comment Action Buttons (Report / Delete / Dismiss) */
+        .comment-action-btn {
+            background: transparent;
+            border: none;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-left: 0.6rem;
+            padding: 0.1rem 0.35rem;
+            border-radius: 4px;
+        }
+
+        .report-comment-btn {
+            color: #64748b;
+        }
+
+        .report-comment-btn:hover {
+            color: #d97706;
+            background: #fef3c7;
+        }
+
+        .reported-tag {
+            display: inline-block;
+            background: #fef3c7;
+            color: #b45309;
+            border: 1px solid #fcd34d;
+            font-size: 0.74rem;
+            font-weight: 700;
+            padding: 0.15rem 0.55rem;
+            border-radius: 999px;
+        }
+
+        .dismiss-report-btn {
+            color: #059669;
+        }
+
+        .dismiss-report-btn:hover {
+            background: #d1fae5;
+        }
+
+        .delete-comment-btn {
+            color: #dc2626;
+        }
+
+        .delete-comment-btn:hover {
+            background: #fee2e2;
+        }
+
+        .composer-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+            margin-bottom: 2rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .identity-bar {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        .identity-toggle {
+            display: inline-flex;
+            background: #f1f5f9;
+            padding: 0.25rem;
+            border-radius: 999px;
+            gap: 0.25rem;
+        }
+
+        .id-mode-btn {
+            border: none;
+            background: transparent;
+            padding: 0.45rem 1rem;
+            border-radius: 999px;
+            font-weight: 700;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: #475569;
+            transition: all 0.2s;
+        }
+
+        .id-mode-btn.active {
+            background: #6c2bd9;
+            color: #ffffff;
+        }
+
+        .id-mode-btn.active.anon-active {
+            background: #1e293b;
+            color: #ffffff;
+        }
+
+        .composer-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .forum-input, .forum-select, .forum-textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 0.95rem;
+            outline: none;
+        }
+
+        .forum-input:focus, .forum-select:focus, .forum-textarea:focus {
+            border-color: #6c2bd9;
+        }
+
+        .composer-row .forum-input {
+            flex: 2;
+            min-width: 200px;
+        }
+
+        .composer-row .forum-select {
+            flex: 1;
+            min-width: 160px;
+        }
+
+        .forum-textarea {
+            min-height: 95px;
+            resize: vertical;
+            margin-bottom: 0.75rem;
+        }
+
+        .composer-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .posting-as-badge {
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: #475569;
+        }
+
+        .feed-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .flair-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+        }
+
+        .sort-controls {
+            display: flex;
+            gap: 0.4rem;
+        }
+
+        .sort-btn {
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            padding: 0.45rem 0.9rem;
+            border-radius: 999px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.85rem;
+        }
+
+        .sort-btn.active {
+            background: #fdf2f8;
+            border-color: #ec4899;
+            color: #be185d;
+        }
+
+        .reddit-post {
+            display: flex;
+            background: #ffffff;
+            border-radius: 14px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+            margin-bottom: 1.1rem;
+            overflow: hidden;
+            transition: border-color 0.2s;
+        }
+
+        .reddit-post:hover {
+            border-color: #c4b5fd;
+        }
+
+        .reddit-post.post-is-reported {
+            border: 2px solid #f59e0b;
+            background: #fffdf5;
+        }
+
+        .vote-column {
+            background: #f8fafc;
+            padding: 1rem 0.75rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.3rem;
+            min-width: 54px;
+            border-right: 1px solid #f1f5f9;
+        }
+
+        .vote-btn {
+            border: none;
+            background: transparent;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.15rem 0.35rem;
+            border-radius: 6px;
+            color: #64748b;
+            line-height: 1;
+        }
+
+        .vote-btn:hover {
+            background: #e2e8f0;
+        }
+
+        .vote-btn.upvoted {
+            color: #ec4899;
+        }
+
+        .vote-btn.downvoted {
+            color: #6c2bd9;
+        }
+
+        .vote-count {
+            font-weight: 800;
+            font-size: 0.95rem;
+            color: #1e293b;
+        }
+
+        .post-main {
+            padding: 1.1rem 1.35rem;
+            flex: 1;
+        }
+
+        .post-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.82rem;
+            color: #64748b;
+            margin-bottom: 0.45rem;
+        }
+
+        .flair-tag {
+            background: #f3e8ff;
+            color: #6c2bd9;
+            font-weight: 700;
+            padding: 0.2rem 0.65rem;
+            border-radius: 999px;
+            font-size: 0.78rem;
+        }
+
+        .author-badge {
+            font-weight: 700;
+            color: #334155;
+        }
+
+        .author-badge.anon {
+            background: #1e293b;
+            color: #ffffff;
+            padding: 0.15rem 0.55rem;
+            border-radius: 6px;
+            font-size: 0.78rem;
+        }
+
+        .author-badge.admin {
+            background: #6c2bd9;
+            color: #ffffff;
+            padding: 0.15rem 0.55rem;
+            border-radius: 6px;
+            font-size: 0.78rem;
+        }
+
+        .post-title {
+            font-size: 1.2rem;
+            color: #1e293b;
+            margin-bottom: 0.45rem;
+        }
+
+        .post-body {
+            color: #334155;
+            font-size: 0.96rem;
+            margin-bottom: 0.9rem;
+            white-space: pre-line;
+        }
+
+        .post-actions {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .post-actions-left, .post-actions-right {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .action-link {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 0.35rem 0.8rem;
+            border-radius: 999px;
+            font-size: 0.84rem;
+            font-weight: 600;
+            color: #475569;
+            cursor: pointer;
+        }
+
+        .action-link:hover {
+            background: #f1f5f9;
+            color: #6c2bd9;
+        }
+
+        .action-link.report-post-btn:hover {
+            background: #fef3c7;
+            border-color: #fcd34d;
+            color: #b45309;
+        }
+
+        .comments-drawer {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+            display: none;
+        }
+
+        .comments-drawer.open {
+            display: block;
+        }
+
+        .comment-item {
+            border-left: 3px solid #d8b4fe;
+            padding: 0.4rem 0 0.4rem 0.85rem;
+            margin-bottom: 0.85rem;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .comment-item.is-reported {
+            border-left-color: #f59e0b;
+            background: #fffbeb;
+        }
+
+        .comment-meta {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.8rem;
+            color: #64748b;
+            margin-bottom: 0.2rem;
+        }
+
+        .comment-text {
+            font-size: 0.92rem;
+            color: #1e293b;
+        }
+
+        .comment-form {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            margin-top: 0.85rem;
+            background: #f8fafc;
+            padding: 0.85rem;
+            border-radius: 10px;
+        }
+
+        .comment-form-top {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .mini-input {
+            padding: 0.5rem 0.8rem;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 0.88rem;
+        }
+
+        @media (max-width: 600px) {
+            .reddit-post {
+                flex-direction: column;
+            }
+            .vote-column {
+                flex-direction: row;
+                border-right: none;
+                border-bottom: 1px solid #f1f5f9;
+                padding: 0.5rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+
+    <section id="forum-section">
+        <div class="forum-container">
+            <!-- INLINE ADMIN CONTROL BAR -->
+            <div class="admin-bar">
+                <span id="admin-badge" class="admin-status-badge" style="display: none;">
+                    🛡️ Admin Mode Active
+                </span>
+
+                <div id="admin-login-box" class="admin-login-box">
+                    <input
+                        type="password"
+                        id="admin-pin-field"
+                        class="admin-pin-input"
+                        placeholder="PIN"
+                        onkeydown="if(event.key==='Enter') submitAdminPin()"
+                    >
+                    <button type="button" class="admin-toggle-btn" onclick="submitAdminPin()">Unlock</button>
+                    <button type="button" class="admin-toggle-btn" onclick="closeAdminBox()">✕</button>
+                </div>
+
+                <button type="button" id="admin-btn" class="admin-toggle-btn" onclick="handleAdminButton()">
+                    🛡️ Admin Login
+                </button>
+            </div>
+
+            <h2 class="section-title">💬 GirlCode Community Forum</h2>
+            <p class="section-intro">
+                Ask questions, share coding wins, or explore career advice! Post with your
+                <strong>Personal</strong> name or switch to <strong>Anonymous</strong> anytime.
+            </p>
+
+            <!-- CREATE POST BOX -->
+            <div class="composer-card">
+                <div class="identity-bar">
+                    <div class="identity-toggle" role="group" aria-label="Choose posting identity">
+                        <button type="button" id="btn-personal" class="id-mode-btn active" onclick="setIdentityMode('personal')">
+                            👩‍💻 Personal
+                        </button>
+                        <button type="button" id="btn-anonymous" class="id-mode-btn" onclick="setIdentityMode('anonymous')">
+                            🕵️ Anonymous
+                        </button>
+                    </div>
+
+                    <div id="personal-name-wrapper">
+                        <input
+                            type="text"
+                            id="author-name-input"
+                            class="mini-input"
+                            placeholder="Your display name (e.g. Maya_Codes)"
+                            maxlength="30"
+                        >
+                    </div>
+                </div>
+
+                <div class="composer-row">
+                    <input
+                        type="text"
+                        id="post-title-input"
+                        class="forum-input"
+                        placeholder="Post title (e.g. How did you build your first website?)"
+                        maxlength="120"
+                    >
+                    <select id="post-flair-select" class="forum-select" aria-label="Select topic">
+                        <option value="Coding & Tech">💻 Coding &amp; Tech</option>
+                        <option value="Career Advice">🔮 Career Advice</option>
+                        <option value="Study & Homework">📚 Study &amp; Homework</option>
+                        <option value="Project Showcase">🚀 Project Showcase</option>
+                        <option value="General Chat">💜 General Chat</option>
+                    </select>
+                </div>
+
+                <textarea
+                    id="post-body-input"
+                    class="forum-textarea"
+                    placeholder="Share your question, idea, or project details..."
+                ></textarea>
+
+                <div class="composer-footer">
+                    <span class="posting-as-badge" id="posting-as-preview">
+                        Posting as: <strong>Personal</strong> (your display name)
+                    </span>
+                    <button type="button" class="button" onclick="createPost()">Post to Forum ✨</button>
+                </div>
+            </div>
+
+            <!-- FEED FILTERS & SORT -->
+            <div class="feed-toolbar">
+                <div class="flair-filters">
+                    <button type="button" class="filter-btn active" onclick="filterPosts('all', this)">All Posts</button>
+                    <button type="button" class="filter-btn" onclick="filterPosts('Coding & Tech', this)">💻 Coding &amp; Tech</button>
+                    <button type="button" class="filter-btn" onclick="filterPosts('Career Advice', this)">🔮 Career Advice</button>
+                    <button type="button" class="filter-btn" onclick="filterPosts('Study & Homework', this)">📚 Study</button>
+                    <button type="button" class="filter-btn" onclick="filterPosts('Project Showcase', this)">🚀 Showcase</button>
+                    <button type="button" id="filter-reported-btn" class="filter-btn" style="display:none;" onclick="filterPosts('reported', this)">🚩 Reported</button>
+                </div>
+
+                <div class="sort-controls">
+                    <button type="button" id="sort-hot" class="sort-btn active" onclick="setSort('hot')">🔥 Top</button>
+                    <button type="button" id="sort-new" class="sort-btn" onclick="setSort('new')">🕒 New</button>
+                </div>
+            </div>
+
+            <!-- POSTS FEED -->
+            <div id="forum-feed"></div>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="link.js"></script>
+    <script src="script.js"></script>
+    <script>
+        const STORAGE_KEY = "girlcode_forum_posts_v3";
+        const ADMIN_SESSION_KEY = "girlcode_forum_admin";
+        const ADMIN_PIN = "2026";
+
+        const starterPosts = [
+            {
+                id: 1,
+                title: "Which language should I learn after HTML & CSS?",
+                body: "I just finished styling my first portfolio page! Should I jump into JavaScript next to make it interactive, or start learning Python for AI?",
+                flair: "Coding & Tech",
+                isAnonymous: false,
+                author: "Amina_Dev",
+                reported: false,
+                votes: 18,
+                userVote: 0,
+                timestamp: Date.now() - 7200000,
+                comments: [
+                    {
+                        author: "Sophie_UX",
+                        isAnonymous: false,
+                        reported: false,
+                        text: "If you love building websites, JavaScript is a natural next step because it works right inside your HTML pages!"
+                    },
+                    {
+                        author: "Anonymous Member",
+                        isAnonymous: true,
+                        reported: false,
+                        text: "I tried Python right after HTML/CSS and found it super readable. You really can't go wrong with either!"
+                    }
+                ]
+            },
+            {
+                id: 2,
+                title: "Nervous about being the only girl in my school's computing club",
+                body: "I really want to join robotics and coding club this term, but none of my close friends are signing up. Has anyone else experienced this?",
+                flair: "Career Advice",
+                isAnonymous: true,
+                author: "Anonymous Member",
+                reported: false,
+                votes: 24,
+                userVote: 0,
+                timestamp: Date.now() - 14400000,
+                comments: [
+                    {
+                        author: "Grace_H",
+                        isAnonymous: false,
+                        reported: false,
+                        text: "I felt the exact same way last year! Once we started building projects, everyone focused on solving problems together. Definitely go for it!"
+                    }
+                ]
+            },
+            {
+                id: 3,
+                title: "Just completed all the Healthcare & Science challenges!",
+                body: "Loved the MRI and DNA questions on the Challenges page—made me look into Bioinformatics as a future career!",
+                flair: "Project Showcase",
+                isAnonymous: false,
+                author: "Zara_STEM",
+                reported: false,
+                votes: 11,
+                userVote: 0,
+                timestamp: Date.now() - 3600000,
+                comments: []
+            }
+        ];
+
+        let posts = JSON.parse(localStorage.getItem(STORAGE_KEY)) || starterPosts;
+        let isAdmin = sessionStorage.getItem(ADMIN_SESSION_KEY) === "true";
+        let currentIdentityMode = "personal";
+        let activeFlair = "all";
+        let activeSort = "hot";
+        let openDrawers = new Set();
+
+        function updateAdminUI() {
+            const badge = document.getElementById("admin-badge");
+            const btn = document.getElementById("admin-btn");
+            const loginBox = document.getElementById("admin-login-box");
+            const reportedFilterBtn = document.getElementById("filter-reported-btn");
+
+            if (isAdmin) {
+                badge.style.display = "inline-block";
+                btn.textContent = "🔒 Lock Admin";
+                loginBox.classList.remove("open");
+                reportedFilterBtn.style.display = "inline-block";
+            } else {
+                badge.style.display = "none";
+                btn.textContent = "🛡️ Admin Login";
+                reportedFilterBtn.style.display = "none";
+                if (activeFlair === "reported") activeFlair = "all";
+            }
+        }
+
+        function handleAdminButton() {
+            if (isAdmin) {
+                isAdmin = false;
+                sessionStorage.removeItem(ADMIN_SESSION_KEY);
+                updateAdminUI();
+                renderFeed();
+                return;
+            }
+            const loginBox = document.getElementById("admin-login-box");
+            loginBox.classList.toggle("open");
+            if (loginBox.classList.contains("open")) {
+                document.getElementById("admin-pin-field").focus();
+            }
+        }
+
+        function closeAdminBox() {
+            document.getElementById("admin-login-box").classList.remove("open");
+            document.getElementById("admin-pin-field").value = "";
+        }
+
+        function submitAdminPin() {
+            const pinField = document.getElementById("admin-pin-field");
+            if (pinField.value.trim() === ADMIN_PIN) {
+                isAdmin = true;
+                sessionStorage.setItem(ADMIN_SESSION_KEY, "true");
+                pinField.value = "";
+                updateAdminUI();
+                renderFeed();
+            } else {
+                pinField.style.borderColor = "#dc2626";
+                pinField.value = "";
+                pinField.placeholder = "Wrong PIN";
+            }
+        }
+
+        function deletePost(postId) {
+            if (!isAdmin) return;
+            posts = posts.filter(p => p.id !== postId);
+            savePosts();
+            renderFeed();
+        }
+
+        function reportPost(postId) {
+            const post = posts.find(p => p.id === postId);
+            if (!post) return;
+            post.reported = true;
+            savePosts();
+            renderFeed();
+        }
+
+        function dismissPostReport(postId) {
+            if (!isAdmin) return;
+            const post = posts.find(p => p.id === postId);
+            if (!post) return;
+            post.reported = false;
+            savePosts();
+            renderFeed();
+        }
+
+        function deleteComment(postId, commentIndex) {
+            if (!isAdmin) return;
+            const post = posts.find(p => p.id === postId);
+            if (!post) return;
+            post.comments.splice(commentIndex, 1);
+            savePosts();
+            renderFeed();
+        }
+
+        function reportComment(postId, commentIndex) {
+            const post = posts.find(p => p.id === postId);
+            if (!post || !post.comments[commentIndex]) return;
+
+            post.comments[commentIndex].reported = true;
+            openDrawers.add(postId);
+            savePosts();
+            renderFeed();
+        }
+
+        function dismissReport(postId, commentIndex) {
+            if (!isAdmin) return;
+            const post = posts.find(p => p.id === postId);
+            if (!post || !post.comments[commentIndex]) return;
+
+            post.comments[commentIndex].reported = false;
+            savePosts();
+            renderFeed();
+        }
+
+        function savePosts() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(posts));
+        }
+
+        function setIdentityMode(mode) {
+            currentIdentityMode = mode;
+            const personalBtn = document.getElementById("btn-personal");
+            const anonBtn = document.getElementById("btn-anonymous");
+            const nameWrapper = document.getElementById("personal-name-wrapper");
+            const preview = document.getElementById("posting-as-preview");
+
+            if (mode === "personal") {
+                personalBtn.classList.add("active");
+                anonBtn.classList.remove("active", "anon-active");
+                nameWrapper.style.display = "block";
+                preview.innerHTML = 'Posting as: <strong>Personal</strong> (your display name)';
+            } else {
+                anonBtn.classList.add("active", "anon-active");
+                personalBtn.classList.remove("active");
+                nameWrapper.style.display = "none";
+                preview.innerHTML = 'Posting as: <strong>🕵️ Anonymous Member</strong> (identity hidden)';
+            }
+        }
+
+        function createPost() {
+            const titleEl = document.getElementById("post-title-input");
+            const bodyEl = document.getElementById("post-body-input");
+            const flairEl = document.getElementById("post-flair-select");
+            const nameEl = document.getElementById("author-name-input");
+
+            const title = titleEl.value.trim();
+            const body = bodyEl.value.trim();
+
+            if (!title) {
+                titleEl.style.borderColor = "#ec4899";
+                titleEl.focus();
+                return;
+            }
+            titleEl.style.borderColor = "#e2e8f0";
+
+            let authorName = "Anonymous Member";
+            let isAnon = true;
+            let postedByAdmin = false;
+
+            if (currentIdentityMode === "personal") {
+                isAnon = false;
+                postedByAdmin = isAdmin;
+                authorName = nameEl.value.trim() || (isAdmin ? "GirlCode Admin" : "GirlCode Member");
+            }
+
+            const newPost = {
+                id: Date.now(),
+                title: title,
+                body: body,
+                flair: flairEl.value,
+                isAnonymous: isAnon,
+                isAdminPost: postedByAdmin,
+                author: authorName,
+                reported: false,
+                votes: 1,
+                userVote: 1,
+                timestamp: Date.now(),
+                comments: []
+            };
+
+            posts.unshift(newPost);
+            savePosts();
+
+            titleEl.value = "";
+            bodyEl.value = "";
+            renderFeed();
+        }
+
+        function votePost(postId, direction) {
+            const post = posts.find(p => p.id === postId);
+            if (!post) return;
+
+            if (post.userVote === direction) {
+                post.votes -= direction;
+                post.userVote = 0;
+            } else {
+                post.votes += direction - post.userVote;
+                post.userVote = direction;
+            }
+
+            savePosts();
+            renderFeed();
+        }
+
+        function toggleComments(postId) {
+            if (openDrawers.has(postId)) {
+                openDrawers.delete(postId);
+            } else {
+                openDrawers.add(postId);
+            }
+            renderFeed();
+        }
+
+        function addComment(postId) {
+            const post = posts.find(p => p.id === postId);
+            const textInput = document.getElementById(`comment-text-${postId}`);
+            const modeSelect = document.getElementById(`comment-mode-${postId}`);
+            const nameInput = document.getElementById(`comment-name-${postId}`);
+
+            const text = textInput.value.trim();
+            if (!text || !post) return;
+
+            const isAnon = modeSelect.value === "anonymous";
+            const author = isAnon
+                ? "Anonymous Member"
+                : (nameInput.value.trim() || (isAdmin ? "GirlCode Admin" : "GirlCode Member"));
+
+            post.comments.push({
+                author: author,
+                isAnonymous: isAnon,
+                isAdminComment: !isAnon && isAdmin,
+                reported: false,
+                text: text
+            });
+
+            openDrawers.add(postId);
+            savePosts();
+            renderFeed();
+        }
+
+        function toggleCommentNameInput(postId) {
+            const modeSelect = document.getElementById(`comment-mode-${postId}`);
+            const nameInput = document.getElementById(`comment-name-${postId}`);
+            nameInput.style.display = modeSelect.value === "anonymous" ? "none" : "inline-block";
+        }
+
+        function filterPosts(flair, btn) {
+            activeFlair = flair;
+            document.querySelectorAll(".flair-filters .filter-btn").forEach(b => b.classList.remove("active"));
+            if (btn) btn.classList.add("active");
+            renderFeed();
+        }
+
+        function setSort(sortType) {
+            activeSort = sortType;
+            document.getElementById("sort-hot").classList.toggle("active", sortType === "hot");
+            document.getElementById("sort-new").classList.toggle("active", sortType === "new");
+            renderFeed();
+        }
+
+        function timeAgo(ts) {
+            const mins = Math.floor((Date.now() - ts) / 60000);
+            if (mins < 1) return "just now";
+            if (mins < 60) return `${mins}m ago`;
+            const hrs = Math.floor(mins / 60);
+            if (hrs < 24) return `${hrs}h ago`;
+            return `${Math.floor(hrs / 24)}d ago`;
+        }
+
+        function escapeHTML(str) {
+            return str
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;");
+        }
+
+        function renderFeed() {
+            const feedEl = document.getElementById("forum-feed");
+            let visible = posts.filter(p => {
+                if (activeFlair === "all") return true;
+                if (activeFlair === "reported") return p.reported || p.comments.some(c => c.reported);
+                return p.flair === activeFlair;
+            });
+
+            if (activeSort === "hot") {
+                visible.sort((a, b) => b.votes - a.votes);
+            } else {
+                visible.sort((a, b) => b.timestamp - a.timestamp);
+            }
+
+            if (visible.length === 0) {
+                feedEl.innerHTML = `<div class="challenge"><p>No posts found here right now! 💜</p></div>`;
+                return;
+            }
+
+            feedEl.innerHTML = visible.map(post => {
+                const hasReportedComments = post.comments.some(c => c.reported);
+                const isOpen = openDrawers.has(post.id) || (isAdmin && hasReportedComments);
+
+                let authorBadge = `<span class="author-badge">👩‍💻 ${escapeHTML(post.author)}</span>`;
+                if (post.isAnonymous) {
+                    authorBadge = `<span class="author-badge anon">🕵️ ${escapeHTML(post.author)}</span>`;
+                } else if (post.isAdminPost) {
+                    authorBadge = `<span class="author-badge admin">🛡️ ${escapeHTML(post.author)}</span>`;
+                }
+
+                // Post report & admin controls
+                const reportPostBtn = !post.reported
+                    ? `<button type="button" class="action-link report-post-btn" onclick="reportPost(${post.id})">🚩 Report</button>`
+                    : `<span class="reported-tag">🚩 Post Reported</span>`;
+
+                const adminPostControls = isAdmin
+                    ? `
+                        ${post.reported ? `<button type="button" class="keep-btn" onclick="dismissPostReport(${post.id})">✓ Keep Post</button>` : ""}
+                        <button type="button" class="delete-btn" onclick="deletePost(${post.id})">🗑️ Delete Post</button>
+                      `
+                    : "";
+
+                const postReportedAlert = (isAdmin && !post.reported && hasReportedComments)
+                    ? `<span class="reported-tag">🚩 Contains Reported Comment</span>`
+                    : "";
+
+                const commentsHTML = post.comments.map((c, cIdx) => {
+                    const icon = c.isAnonymous ? "🕵️ " : (c.isAdminComment ? "🛡️ " : "👩‍💻 ");
+
+                    const reportedBadge = c.reported
+                        ? `<span class="reported-tag">🚩 Reported</span>`
+                        : "";
+
+                    const reportBtn = !c.reported
+                        ? `<button type="button" class="comment-action-btn report-comment-btn" onclick="reportComment(${post.id}, ${cIdx})">🚩 Report</button>`
+                        : "";
+
+                    const adminCommentControls = isAdmin
+                        ? `
+                            ${c.reported ? `<button type="button" class="comment-action-btn dismiss-report-btn" onclick="dismissReport(${post.id}, ${cIdx})">✓ Keep</button>` : ""}
+                            <button type="button" class="comment-action-btn delete-comment-btn" onclick="deleteComment(${post.id}, ${cIdx})">🗑️ Delete</button>
+                          `
+                        : "";
+
+                    return `
+                        <div class="comment-item ${c.reported ? 'is-reported' : ''}">
+                            <div class="comment-meta">
+                                <strong>${icon}${escapeHTML(c.author)}</strong>
+                                ${reportedBadge}
+                                ${reportBtn}
+                                ${adminCommentControls}
+                            </div>
+                            <div class="comment-text">${escapeHTML(c.text)}</div>
+                        </div>
+                    `;
+                }).join("");
+
+                return `
+                    <article class="reddit-post ${post.reported ? 'post-is-reported' : ''}">
+                        <div class="vote-column">
+                            <button type="button" class="vote-btn ${post.userVote === 1 ? 'upvoted' : ''}" onclick="votePost(${post.id}, 1)" aria-label="Upvote">▲</button>
+                            <span class="vote-count">${post.votes}</span>
+                            <button type="button" class="vote-btn ${post.userVote === -1 ? 'downvoted' : ''}" onclick="votePost(${post.id}, -1)" aria-label="Downvote">▼</button>
+                        </div>
+
+                        <div class="post-main">
+                            <div class="post-meta">
+                                <span class="flair-tag">${escapeHTML(post.flair)}</span>
+                                <span>• Posted by</span>
+                                ${authorBadge}
+                                <span>• ${timeAgo(post.timestamp)}</span>
+                                ${postReportedAlert}
+                            </div>
+
+                            <h3 class="post-title">${escapeHTML(post.title)}</h3>
+                            ${post.body ? `<p class="post-body">${escapeHTML(post.body)}</p>` : ""}
+
+                            <div class="post-actions">
+                                <div class="post-actions-left">
+                                    <button type="button" class="action-link" onclick="toggleComments(${post.id})">
+                                        💬 ${post.comments.length} ${post.comments.length === 1 ? 'Comment' : 'Comments'}
+                                    </button>
+                                    ${reportPostBtn}
+                                </div>
+                                <div class="post-actions-right">
+                                    ${adminPostControls}
+                                </div>
+                            </div>
+
+                            <div class="comments-drawer ${isOpen ? 'open' : ''}">
+                                ${commentsHTML || '<p style="font-size:0.88rem; color:#64748b; margin-bottom:0.75rem;">No comments yet. Share a supportive reply!</p>'}
+
+                                <div class="comment-form">
+                                    <div class="comment-form-top">
+                                        <select id="comment-mode-${post.id}" class="mini-input" onchange="toggleCommentNameInput(${post.id})">
+                                            <option value="personal">👩‍💻 Comment as Personal</option>
+                                            <option value="anonymous">🕵️ Comment Anonymously</option>
+                                        </select>
+                                        <input type="text" id="comment-name-${post.id}" class="mini-input" placeholder="Your name...">
+                                    </div>
+                                    <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+                                        <input type="text" id="comment-text-${post.id}" class="forum-input" style="flex:1;" placeholder="Write a helpful comment...">
+                                        <button type="button" class="button pink" onclick="addComment(${post.id})">Reply</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                `;
+            }).join("");
+        }
+
+        updateAdminUI();
+        renderFeed();
+    </script>
+</body>
+</html>
