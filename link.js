@@ -14,5 +14,5 @@ async function loadComponent(elementId, file) {
       }
     }
 
-    loadComponent("header-placeholder", "components/header.html");
-    loadComponent("footer-placeholder", "components/footer.html");
+    loadComponent("header-placeholder", "header.html");
+    loadComponent("footer-placeholder", "footer.html");
